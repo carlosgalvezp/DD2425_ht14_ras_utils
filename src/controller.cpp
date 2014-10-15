@@ -27,9 +27,12 @@ void Controller::setData(double x_reference, double x_measured)
 double Controller::computeControl()
 {
     double e = x_ref_ - x_measured_;
-    double u = kp_ * e + kd_ * prev_e_ + ki_ * sum_e_;
+    double u = kp_ * e + kd_ * (e - prev_e_) + ki_ * sum_e_;
+
+    std::cout << "ERROR ["<<e<<";"<<kp_*e <<","<<kd_*prev_e_<<","<<ki_*sum_e_<<"]: " << e << std::endl;
 
     prev_e_ = e;
     sum_e_ = sum_e_ + e;
+    std::cout << "U:  "<<u<<std::endl;
     return u;
 }
