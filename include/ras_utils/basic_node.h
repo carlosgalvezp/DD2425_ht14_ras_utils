@@ -68,6 +68,11 @@ namespace rob {
             add_param(name, destination, &default_value);
         }
 
+        void add_param(const std::string & name, std::string & destination, char default_value[]) {
+            std::string temp(default_value);
+            add_param(name, destination, &temp);
+        }
+
         template<typename T>
         void add_param(const std::string & name, T & destination, T * default_value = NULL) {
             params.push_back(Param(name, &destination, default_value));
@@ -97,7 +102,7 @@ namespace rob {
                 int missing = longest_name_length + print_padding - param.name.length();
                 padding.assign(missing, ' ');
 
-                switch(Param::Type(param.default_value.which())) {
+                switch(Param::Type(param.destination.which())) {
                 case Param::Type::BOOL:
                     print_params<bool>(padding, param, bool_to_str);
                     break;
@@ -133,7 +138,6 @@ namespace rob {
             std::string info_string = param.name + ":" + padding;
 
             T * dest = boost::get<T *>(param.destination);
-
             info_string += type_to_string(*dest);
 
             if(!param.no_default) {
