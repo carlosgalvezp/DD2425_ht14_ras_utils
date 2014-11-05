@@ -83,6 +83,50 @@ namespace rob {
             }
         }
 
+        void print(const std::string & text) {
+             ROS_INFO(text.c_str());
+        }
+
+        void print(const std::string & text, const double value, std::string & padding) {
+            ROS_INFO((text + ":" + padding + "%f").c_str(), value);
+        }
+
+        void print(const std::string & text, const double value) {
+            std::string padding;
+            padding.assign(print_padding, ' ');
+            ROS_INFO((text + ":" + padding + "%f").c_str(), value);
+        }
+        void print(const std::string & text, const double value1, const double value2) {
+            std::string padding;
+            padding.assign(print_padding, ' ');
+            ROS_INFO((text + ":" + padding + "%f | %f").c_str(), value1, value2);
+        }
+
+        void print(const std::vector<std::string> & texts, const std::vector<double> & values) {
+            if(texts.size() != values.size()) {
+                print("!!! ERROR !!! Vectors in print function have different sizes");
+                print("texts, values", texts.size(), values.size());
+                return;
+            }
+            int longest_text_length = 0;
+            for(std::string text : texts) {
+                if(text.length() > longest_text_length) {
+                    longest_text_length = text.length();
+                }
+            }
+
+            std::string padding;
+
+
+            for(int i = 0; i < texts.size(); i++) {
+                int missing = longest_text_length + print_padding - texts[i].length();
+                padding.assign(missing, ' ');
+                print(texts[i], values[i], padding);
+            }
+            ROS_INFO("");
+        }
+
+
         //TODO: update_param.
 
         /**
@@ -144,7 +188,6 @@ namespace rob {
                 T def = boost::get<T>(param.default_value);
                 info_string += " (" + type_to_string(def) + ")";
             }
-
             ROS_INFO(info_string.c_str());
         }
 
