@@ -8,6 +8,16 @@ Controller::Controller()
     sum_e_ = 0.0;
 }
 
+Controller::Controller(double kp, double kd, double ki)
+{
+    kp_ = kp;
+    kd_ = kd;
+    ki_ = ki;
+    out_max_ = 1000;
+    prev_e_ = 0.0;
+    sum_e_ = 0.0;
+}
+
 Controller::Controller(double kp, double kd, double ki, double out_max)
 {
     kp_ = kp;

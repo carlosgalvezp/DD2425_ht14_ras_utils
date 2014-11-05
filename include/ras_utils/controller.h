@@ -19,6 +19,14 @@ public:
      * @param kd D gain
      * @param ki I gain
      */
+    Controller(double kp, double kd, double ki);
+
+    /**
+     * @brief PID controller
+     * @param kp P gain
+     * @param kd D gain
+     * @param ki I gain
+     */
     Controller(double kp, double kd, double ki, double out_max);
 
     /**

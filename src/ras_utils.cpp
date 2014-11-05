@@ -11,6 +11,10 @@ namespace RAS_Utils
         else        return -1;
     }
 
+    double time_diff_ms(const std::clock_t &begin, const std::clock_t &end)
+    {
+        return 1000.0*(double)(end-begin)/(double)CLOCKS_PER_SEC;
+    }
     double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof)
     {
         double distance = 0;
