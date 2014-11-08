@@ -1,6 +1,4 @@
 #include <ras_utils/ras_utils.h>
-#include <vector>
-#include <math.h>
 
 namespace RAS_Utils
 {
@@ -15,6 +13,19 @@ namespace RAS_Utils
     {
         return 1000.0*(double)(end-begin)/(double)CLOCKS_PER_SEC;
     }
+
+    double time_diff_ms(timeval *begin, timeval *end)
+    {
+        return 1000.0*(end->tv_sec  - begin->tv_sec) +
+                0.001*(end->tv_usec - begin->tv_usec);
+    }
+
+    double time_diff_ms(const ros::WallTime &begin, const ros::WallTime &end)
+    {
+        return (end.toNSec() - begin.toNSec())/1000000.0;
+    }
+
+
     double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof)
     {
         double distance = 0;
