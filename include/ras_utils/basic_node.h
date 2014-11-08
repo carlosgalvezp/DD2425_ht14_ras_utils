@@ -13,6 +13,8 @@
 #define PRINT_PADDING       5
 #define NODE_HANDLE_PARAM   "~"
 
+#define ACTIVATE_NODE_TOPIC_NAME  "brain/activate_node"
+
 namespace rob {
     class BasicNode {
         struct Param {
