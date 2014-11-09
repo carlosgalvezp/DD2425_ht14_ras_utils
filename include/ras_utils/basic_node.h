@@ -210,6 +210,6 @@ namespace rob {
             }
         }
     };
-};
+}
 
 #endif
