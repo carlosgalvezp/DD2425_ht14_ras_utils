@@ -9,6 +9,8 @@
 #include <vector>
 #include <ros/ros.h>
 #include <boost/variant.hpp>
+#include <ras_srv_msgs/Command.h>
+#include <ras_utils/ras_names.h>
 
 #define PRINT_PADDING       5
 #define NODE_HANDLE_PARAM   "~"
@@ -43,18 +45,30 @@ namespace rob {
                     this->default_value = *default_value;
                 }
             }
-
-
         };
 
     private:
         std::vector<Param> params;
         int longest_name_length;
         const int print_padding;
-
     protected:
         ros::NodeHandle n;
-
+        // ** Services
+        ros::ServiceClient srv_out_;
+        ros::ServiceServer srv_in_;
+        /**
+         * @brief communicates a command to another node
+         * @param srv_name the other node's server name
+         * @param command the command
+         * @return true if successfully sent the message
+         */
+        bool communicate(const std::string &srv_name, int command)
+        {
+            srv_out_ = n.serviceClient<ras_srv_msgs::Command>(srv_name);
+            ras_srv_msgs::Command message;
+            message.request.command = command;
+            return srv_out_.call(message);
+        }
     public:
         BasicNode(int print_padding = PRINT_PADDING) : n(NODE_HANDLE_PARAM), longest_name_length(0), print_padding(print_padding) {}
 

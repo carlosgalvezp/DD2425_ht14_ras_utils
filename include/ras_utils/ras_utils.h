@@ -6,6 +6,8 @@
 #include <vector>
 #include <math.h>
 #include "ros/ros.h"
+#include <ras_srv_msgs/Command.h>
+#include <ras_utils/ras_names.h>
 
 namespace RAS_Utils
 {
@@ -17,6 +19,7 @@ double time_diff_ms(const ros::WallTime &begin, const ros::WallTime &end);
 
 double shortSensorToDistanceInCM(int sensor_val);
 double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof);
+
 }
 
 #endif // RAS_UTILS_H
