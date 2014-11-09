@@ -11,8 +11,11 @@
 //ACTION          action that the receiving node will perform
 //VALUE           an integer different from the previous ones
 
-#define COMM_BRAIN_NAVIGATION_WALL 1
-#define COMM_BRAIN_NAVIGATION_STOP 2
+struct Node_Communication
+{
+    static const int COMM_BRAIN_NAVIGATION_WALL = 1;
+    static const int COMM_BRAIN_NAVIGATION_STOP = 2;
+};
 
 
 

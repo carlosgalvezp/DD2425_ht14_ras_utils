@@ -86,7 +86,7 @@ namespace rob {
         }
 
         void print(const std::string & text) {
-             ROS_INFO(text.c_str());
+             ROS_INFO("%s",text.c_str());
         }
 
         void print(const std::string & text, const double value, std::string & padding) {
@@ -190,7 +190,7 @@ namespace rob {
                 T def = boost::get<T>(param.default_value);
                 info_string += " (" + type_to_string(def) + ")";
             }
-            ROS_INFO(info_string.c_str());
+            ROS_INFO("%s",info_string.c_str());
         }
 
         template<class T>
