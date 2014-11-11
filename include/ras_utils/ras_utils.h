@@ -9,6 +9,8 @@
 #include <ras_srv_msgs/Command.h>
 #include <ras_utils/ras_names.h>
 
+#define PRINT_PADDING 5
+
 namespace RAS_Utils
 {
 
@@ -21,6 +23,11 @@ double shortSensorToDistanceInCM(int sensor_val);
 double longSensorToDistanceInCM(int sensor_val);
 double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof);
 
+void print(const std::string & text);
+void print(const std::string & text, const double value, std::string & padding);
+void print(const std::string & text, const double value);
+void print(const std::string & text, const double value1, const double value2);
+void print(const std::vector<std::string> & texts, const std::vector<double> & values);
 }
 
 #endif // RAS_UTILS_H

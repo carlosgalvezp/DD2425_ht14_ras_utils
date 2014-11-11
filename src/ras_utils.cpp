@@ -60,4 +60,47 @@ namespace RAS_Utils
                                     329.045444431424
                                     });
     }
+
+    void print(const std::string & text) {
+         std::cout << text.c_str() << std::endl;
+    }
+
+    void print(const std::string & text, const double value, std::string & padding) {
+        std::cout << text.c_str() << ":" << padding.c_str() << value << std::endl;
+    }
+
+    void print(const std::string & text, const double value) {
+        std::string padding;
+        padding.assign(PRINT_PADDING, ' ');
+        std::cout << text.c_str() << ":" << padding.c_str() << value << std::endl;
+    }
+    void print(const std::string & text, const double value1, const double value2) {
+        std::string padding;
+        padding.assign(PRINT_PADDING, ' ');
+        std::cout << text.c_str() << ":" << padding.c_str() << value1 << "|" << value2 << std::endl;
+    }
+
+    void print(const std::vector<std::string> & texts, const std::vector<double> & values) {
+        if(texts.size() != values.size()) {
+            print("!!! ERROR !!! Vectors in print function have different sizes");
+            print("texts, values", texts.size(), values.size());
+            return;
+        }
+        int longest_text_length = 0;
+        for(std::string text : texts) {
+            if(text.length() > longest_text_length) {
+                longest_text_length = text.length();
+            }
+        }
+
+        std::string padding;
+
+
+        for(int i = 0; i < texts.size(); i++) {
+            int missing = longest_text_length + PRINT_PADDING - texts[i].length();
+            padding.assign(missing, ' ');
+            print(texts[i], values[i], padding);
+        }
+        std::cout << std::endl;
+    }
 }
