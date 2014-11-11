@@ -18,6 +18,7 @@ double time_diff_ms(struct timeval *begin, struct timeval *end);
 double time_diff_ms(const ros::WallTime &begin, const ros::WallTime &end);
 
 double shortSensorToDistanceInCM(int sensor_val);
+double longSensorToDistanceInCM(int sensor_val);
 double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof);
 
 }

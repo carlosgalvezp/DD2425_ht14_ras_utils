@@ -35,7 +35,8 @@ namespace RAS_Utils
         return distance;
     }
 
-    double shortSensorToDistanceInCM(int sensor_val) {
+    double shortSensorToDistanceInCM(int sensor_val)
+    {
         return sensorToDistanceInCM(sensor_val, {
                                     262.503338214074,
                                     -4.88675316092840,
@@ -44,6 +45,19 @@ namespace RAS_Utils
                                     4.90926172893023e-07,
                                     -6.62146190833533e-10,
                                     3.64763123318473e-13
+                                    });
+    }
+
+    double longSensorToDistanceInCM(int sensor_val)
+    {
+        return sensorToDistanceInCM(sensor_val, {
+                                    2.53149410424676e-13,
+                                    -5.23382644623806e-10,
+                                    4.37076393642977e-07,
+                                    -0.000188802004989696,
+                                    0.0447961028587077,
+                                    -5.68757150017330,
+                                    329.045444431424
                                     });
     }
 }
