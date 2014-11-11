@@ -14,6 +14,7 @@
 
 // Topic names
 #define TOPIC_ARDUINO_ADC               "/arduino/adc"
+#define TOPIC_ODOMETRY                  "/robot/odometry"
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
 
