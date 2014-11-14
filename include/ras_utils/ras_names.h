@@ -17,6 +17,7 @@
 #define TOPIC_ODOMETRY                  "/robot/odometry"
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
+#define TOPIC_MAP_OCC_GRID              "/map/occ_grid"
 
 #define TOPIC_MOTOR_CONTROLLER_TWIST    "/motor_controller/twist"
 
