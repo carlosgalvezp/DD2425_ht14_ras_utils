@@ -25,6 +25,11 @@ namespace RAS_Utils
         return (end.toNSec() - begin.toNSec())/1000000.0;
     }
 
+    double time_diff_ns(const ros::WallTime &begin, const ros::WallTime &end)
+    {
+        return (end.toNSec() - begin.toNSec());
+    }
+
 
     double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof)
     {
@@ -102,5 +107,37 @@ namespace RAS_Utils
             print(texts[i], values[i], padding);
         }
         std::cout << std::endl;
+    }
+
+    double mean(const std::vector<double> &data)
+    {
+        double res=0;
+        double N = data.size();
+        for(std::size_t i = 0; i < N; ++i)
+        {
+            res += data[i];
+        }
+        return res/N;
+    }
+
+    double std(const std::vector<double> &data, double mu)
+    {
+        double res=0;
+        double N = data.size();
+        for(std::size_t i = 0; i < N; ++i)
+        {
+            res += (data[i] - mu)*(data[i] - mu);
+        }
+        return sqrt(res/N);
+    }
+
+    double std(const std::vector<double> &data)
+    {
+        return std(data, mean(data));
+    }
+
+    double mahalanobis_distance(const double &x, const double &mu, const double &sigma)
+    {
+        return fabs(x-mu)/sigma;
     }
 }

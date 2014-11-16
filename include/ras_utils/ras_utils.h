@@ -18,6 +18,7 @@ int sign(double a);
 double time_diff_ms(const std::clock_t &begin, const std::clock_t &end);
 double time_diff_ms(struct timeval *begin, struct timeval *end);
 double time_diff_ms(const ros::WallTime &begin, const ros::WallTime &end);
+double time_diff_ns(const ros::WallTime &begin, const ros::WallTime &end);
 
 double shortSensorToDistanceInCM(int sensor_val);
 double longSensorToDistanceInCM(int sensor_val);
@@ -28,6 +29,12 @@ void print(const std::string & text, const double value, std::string & padding);
 void print(const std::string & text, const double value);
 void print(const std::string & text, const double value1, const double value2);
 void print(const std::vector<std::string> & texts, const std::vector<double> & values);
+
+double mean(const std::vector<double> &data);
+double std(const std::vector<double> &data, double mu);
+double std(const std::vector<double> &data);
+
+double mahalanobis_distance(const double &x, const double &mu, const double &sigma);
 }
 
 #endif // RAS_UTILS_H
