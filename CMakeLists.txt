@@ -171,6 +171,12 @@ link_libraries(${OpenCV_LIBRARIES})
 find_package(Eigen REQUIRED)
 include_directories(${EIGEN_INCLUDE_DIRS})
 
+# PCL
+find_package(PCL REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+link_libraries(${PCL_LIBRARIES})
+
 # Define a library target
 FILE(GLOB_RECURSE SOURCES src/*.cpp)
 FILE(GLOB_RECURSE HEADERS include/${PROJECT_NAME}/*.h)

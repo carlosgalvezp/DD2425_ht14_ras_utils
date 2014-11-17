@@ -1,5 +1,6 @@
 #ifndef RAS_NAMES_H
 #define RAS_NAMES_H
+#include <string>
 
 // In this file we define the name of all the nodes and topics. Convention:
 //    NODE_NODE_NAME
@@ -25,6 +26,14 @@
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
 
+// ===========================================================================
+// ===========================================================================
 
+// Paths where we store or read data
+namespace RAS_Names
+{
+const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data/"));
+
+}
 
 #endif
