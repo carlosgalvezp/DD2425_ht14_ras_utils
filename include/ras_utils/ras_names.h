@@ -33,6 +33,7 @@
 namespace RAS_Names
 {
 const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data/"));
+const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string("/camera_extrinsic.txt"));
 
 }
 
