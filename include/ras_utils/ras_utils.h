@@ -35,6 +35,7 @@ double std(const std::vector<double> &data, double mu);
 double std(const std::vector<double> &data);
 
 double mahalanobis_distance(const double &x, const double &mu, const double &sigma);
+
 }
 
 #endif // RAS_UTILS_H
