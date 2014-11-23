@@ -26,7 +26,7 @@
 #define TOPIC_CAMERA_RGB                "/camera/rgb/image_rect_color"
 #define TOPIC_CAMERA_DEPTH              "/camera/depth_registered/hw_registered/image_rect_raw"
 #define TOPIC_OBSTACLE                  "/obstacle"
-
+#define TOPIC_IMU                       "/imu/data"
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
@@ -54,6 +54,7 @@
 #define OBJECT_BLUE_TRIANGLE    "Blue Triangle"
 #define OBJECT_PURPLE_CROSS     "Purple Cross"
 #define OBJECT_PATRIC           "Patric"
+#define OBJECT_UNKNOWN          "An Object"
 
 
 
