@@ -55,6 +55,7 @@
 #define OBJECT_BLUE_TRIANGLE    "Blue Triangle"
 #define OBJECT_PURPLE_CROSS     "Purple Cross"
 #define OBJECT_PATRIC           "Patric"
+#define OBJECT_UNKNOWN          "An Object"
 
 
 

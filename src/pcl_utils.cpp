@@ -71,4 +71,25 @@ void visualizePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr &clou
     viewer->spin();
 
 }
+void transformPoint(const pcl::PointXY &p_in, const Eigen::Matrix3f &transform, pcl::PointXY &p_out)
+{
+    Eigen::Vector3f p_in_norm, p_out_norm;
+    p_in_norm << p_in.x, p_in.y, 1.0;
+
+    p_out_norm = transform * p_in_norm;
+
+    p_out.x = p_out_norm(0,0);
+    p_out.y = p_out_norm(1,0);
+}
+
+double euclideanDistance(const pcl::PointXYZ &p1, const pcl::PointXYZ &p2)
+{
+    return sqrt( (p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
+}
+
+double euclideanDistance(const pcl::PointXY &p1, const pcl::PointXY &p2)
+{
+    return sqrt( (p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+}
+
 }

@@ -27,8 +27,11 @@ void buildPointCloud(const cv::Mat &rgb_img, const cv::Mat &depth_img,
                      pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud_out, double scale_factor=1.0);
 void transform2Dto3D(const cv::Point &p_in, const double &depth, pcl::PointXYZ &p_out);
 void transformPoint(const pcl::PointXYZ &p_in, const Eigen::Matrix4f &transform, pcl::PointXYZ &p_out);
+void transformPoint(const pcl::PointXY &p_in,  const Eigen::Matrix3f &transform, pcl::PointXY &p_out);
 
 void visualizePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr &cloud);
+double euclideanDistance(const pcl::PointXYZ &p1, const pcl::PointXYZ &p2);
+double euclideanDistance(const pcl::PointXY &p1, const pcl::PointXY &p2);
 }
 
 #endif // PCL_UTILS_H
