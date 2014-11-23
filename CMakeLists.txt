@@ -171,11 +171,24 @@ link_libraries(${OpenCV_LIBRARIES})
 find_package(Eigen REQUIRED)
 include_directories(${EIGEN_INCLUDE_DIRS})
 
-# Define a library target
-FILE(GLOB_RECURSE SOURCES src/*.cpp)
-FILE(GLOB_RECURSE HEADERS include/${PROJECT_NAME}/*.h)
-add_library(ras_utils ${SOURCES} ${HEADERS})
-target_link_libraries(ras_utils ${roscpp_LIBRARIES})
+# PCL
+find_package(PCL REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+link_libraries(${PCL_LIBRARIES})
 
-add_executable(utils_tests ${SOURCES} ${HEADERS})
-target_link_libraries(utils_tests ${OpenCV_LIBRARIES})
+# Define a library target
+FILE(GLOB SOURCES src/*.cpp src/genetic/*.cpp src/graph/*.cpp)
+FILE(GLOB HEADERS include/${PROJECT_NAME}/*.h)
+
+add_library(ras_utils ${SOURCES} ${HEADERS})
+add_library(pcl_utils src/pcl_utils.cpp include/${PROJECT_NAME}/pcl_utils.h)
+
+target_link_libraries(ras_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(pcl_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(utils_tests src/apps/main.cpp)
+add_executable(keyboard_listener src/apps/keyboard_listener_node.cpp)
+
+target_link_libraries(utils_tests ras_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(keyboard_listener ras_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
