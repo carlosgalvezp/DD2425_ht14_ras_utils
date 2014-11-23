@@ -8,7 +8,7 @@
 // PCL
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
-
+#include <pcl/visualization/pcl_visualizer.h>
 // =============================================================================
 // ** Camera intrinsics (from /camera/depth_registered/camera_info topic)
 #define FX              574.0527954101562
@@ -28,6 +28,7 @@ void buildPointCloud(const cv::Mat &rgb_img, const cv::Mat &depth_img,
 void transform2Dto3D(const cv::Point &p_in, const double &depth, pcl::PointXYZ &p_out);
 void transformPoint(const pcl::PointXYZ &p_in, const Eigen::Matrix4f &transform, pcl::PointXYZ &p_out);
 
+void visualizePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr &cloud);
 }
 
 #endif // PCL_UTILS_H

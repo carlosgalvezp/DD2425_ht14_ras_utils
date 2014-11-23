@@ -26,6 +26,7 @@
 #define TOPIC_CAMERA_RGB                "/camera/rgb/image_rect_color"
 #define TOPIC_CAMERA_DEPTH              "/camera/depth_registered/hw_registered/image_rect_raw"
 #define TOPIC_OBSTACLE                  "/obstacle"
+#define TOPIC_IMU                       "/imu/data"
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
@@ -38,8 +39,8 @@
 
 // Colors
 #define COLOR_RED       0
-#define COLOR_BLUE      1
-#define COLOR_GREEN     2
+#define COLOR_GREEN     1
+#define COLOR_BLUE      2
 #define COLOR_YELLOW    3
 #define COLOR_PURPLE    4
 
