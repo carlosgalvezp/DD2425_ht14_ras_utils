@@ -20,13 +20,10 @@
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
 #define TOPIC_MAP_OCC_GRID              "/map/occ_grid"
-<<<<<<< HEAD
 #define TOPIC_MAP_OCC_GRID_THICK        "/map/occ_grid_thick"
 
-=======
 #define TOPIC_SPEAKER                   "/espeak/string"
 #define TOPIC_EVIDENCE                  "/evidence"
->>>>>>> b349e0e6c3216317048e7ff1dc767f2cb31807ac
 #define TOPIC_MOTOR_CONTROLLER_TWIST    "/motor_controller/twist"
 #define TOPIC_CAMERA_RGB                "/camera/rgb/image_rect_color"
 #define TOPIC_CAMERA_DEPTH              "/camera/depth_registered/hw_registered/image_rect_raw"
