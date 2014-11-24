@@ -42,6 +42,11 @@ namespace RAS_Utils
 
     double shortSensorToDistanceInCM(int sensor_val)
     {
+        if(sensor_val > 440) {
+            return 4.5;
+        }
+
+
         return sensorToDistanceInCM(sensor_val, {
                                     262.503338214074,
                                     -4.88675316092840,
