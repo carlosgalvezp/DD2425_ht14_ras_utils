@@ -8,7 +8,7 @@
 
 #include <ras_utils/graph/graph.h>
 #include <ras_utils/genetic/genetic_algorithm.h>
-
+#include <ras_utils/ras_utils.h>
 // Graphical params
 #define X_MIN 0
 #define X_MAX 1000
@@ -27,7 +27,21 @@ void visualizeSolution(Graph& graph, GeneticAlgorithm& gm);
 Position createPosition(double x_min, double x_max, double y_min, double y_max);
 double randDouble(double x_min, double x_max);
 
+void testTSP();
+void testVector();
+
 int main()
+{
+    testVector();
+    return 0;
+}
+
+void testVector()
+{
+    std::vector<std::string> v {"cube","cube","ball","cylinder", "ball", "triangle", "ball"};
+    std::cout <<RAS_Utils::get_most_repeated<std::string>(v)<<std::endl;
+}
+void testTSP()
 {
     // ** Set random seed
     srand(std::time(NULL));
@@ -54,9 +68,7 @@ int main()
 
     // ** Visualize solution
     visualizeSolution(graph, gm);
-    return 0;
 }
-
 
 void createGraph(double x_min, double x_max, double y_min, double y_max,
                  unsigned int n_nodes, Graph& graph)
