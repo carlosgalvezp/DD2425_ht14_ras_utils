@@ -29,6 +29,7 @@
 #define TOPIC_CAMERA_DEPTH              "/camera/depth_registered/hw_registered/image_rect_raw"
 #define TOPIC_OBSTACLE                  "/obstacle"
 #define TOPIC_IMU                       "/imu/data"
+#define TOPIC_MARKERS                   "/map_markers"
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
@@ -59,7 +60,9 @@
 #define OBJECT_PATRIC           "Patric"
 #define OBJECT_UNKNOWN          "An Object"
 
-
+// Coordinate frames
+#define COORD_FRAME_WORLD       "world"
+#define COORD_FRAME_ROBOT       "robot"
 
 
 
