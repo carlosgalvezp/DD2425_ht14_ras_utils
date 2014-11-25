@@ -19,8 +19,7 @@
 #define TOPIC_ODOMETRY                  "/robot/odometry"
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
-#define TOPIC_MAP_OCC_GRID_RVIZ         "/map/occ_grid_rviz"
-#define TOPIC_MAP_OCC_GRID_THICK_RVIZ   "/map/occ_grid_thick_rviz"
+#define TOPIC_MAP_OCC_GRID              "/map/occ_grid_rviz"
 #define TOPIC_MAP_OCC_GRID_THICK        "/map/occ_grid_thick"
 
 #define TOPIC_SPEAKER                   "/espeak/string"
