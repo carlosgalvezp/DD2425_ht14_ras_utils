@@ -1,13 +1,14 @@
 #ifndef RAS_SENSOR_UTILS_H
 #define RAS_SENSOR_UTILS_H
 
+
+
 namespace RAS_Utils
 {
-
 namespace sensors
 {
 
-
+#define MAX_DIST_SIDE_WALL 25
 
 
 double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof)
@@ -70,8 +71,61 @@ struct SensorDistances
     }
 };
 
+bool canFollowWall(double d_front, double d_back, double max_dist = MAX_DIST_SIDE_WALL)
+{
+    return d_front < max_dist && d_back < max_dist;
 }
 
+bool canFollowLeftWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return canFollowWall(sd.left_front_, sd.left_back_);
 }
+
+bool canFollowRightWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return canFollowWall(sd.right_front_, sd.right_back_);
+}
+
+bool canFollowWall(const RAS_Utils::sensors::SensorDistances &sd, bool right_wall)
+{
+    if(right_wall)
+    {
+        return canFollowRightWall(sd);
+    }else
+    {
+        return canFollowLeftWall(sd);
+    }
+}
+
+bool canFollowAWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return canFollowLeftWall(sd) || canFollowRightWall(sd);
+}
+
+double getDistanceToLeftWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return  0.5*(sd.left_back_ + sd.left_front_);
+}
+
+double getDistanceToRightWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return 0.5*(sd.right_back_ + sd.right_front_);
+}
+
+double getDistanceToClosestWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    return fmin(getDistanceToLeftWall(sd), getDistanceToRightWall(sd));
+}
+
+bool shouldPrioritizeRightWall(const RAS_Utils::sensors::SensorDistances &sd)
+{
+    if(!canFollowRightWall(sd)) return false;
+    if(!canFollowLeftWall(sd)) return true;
+    return getDistanceToRightWall(sd) < getDistanceToLeftWall(sd);
+}
+
+
+
+}}
 
 #endif // RAS_SENSOR_UTILS_H
