@@ -30,6 +30,7 @@
 #define TOPIC_OBSTACLE                  "/obstacle"
 #define TOPIC_IMU                       "/imu/data"
 #define TOPIC_MARKERS                   "/map_markers"
+#define TOPIC_ENCODERS                  "/arduino/encoders"
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
@@ -89,9 +90,13 @@
 // Paths where we store or read data
 namespace RAS_Names
 {
-const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data/"));
+const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data_train/"));
 const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string("/camera_extrinsic.txt"));
-const std::string GRAPH_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/graph_map.txt"));
+
+const std::string MAP_ROOT_PATH = (std::string(getenv("HOME")) + std::string("/map/"));
+const std::string RAW_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/raw_map.txt"));
+const std::string THICK_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/thick_map.txt"));
+const std::string TOPOLOGICAL_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/topological_map.txt"));
 
     namespace Navigation_Modes
     {
