@@ -7,13 +7,13 @@ Edge::Edge()
     cost_ = 0;
 }
 
-Edge::Edge(Node p1, Node p2, double cost)
+Edge::Edge(const Node& p1, const Node& p2, double cost)
 {
     p1_ = p1;
     p2_ = p2;
     cost_ = cost;
 }
 
-Node Edge::getP1(){    return p1_;}
-Node Edge::getP2(){    return p2_;}
-double Edge::getCost(){    return cost_;}
+const Node& Edge::getP1() const {    return p1_;}
+const Node& Edge::getP2() const {    return p2_;}
+double Edge::getCost()    const {    return cost_;}

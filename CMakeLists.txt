@@ -187,7 +187,7 @@ add_library(pcl_utils src/pcl_utils.cpp include/${PROJECT_NAME}/pcl_utils.h)
 target_link_libraries(ras_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 target_link_libraries(pcl_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${PCL_LIBRARIES})
 
-add_executable(utils_tests src/apps/main.cpp)
+add_executable(utils_tests src/apps/utils_tests.cpp)
 add_executable(keyboard_listener src/apps/keyboard_listener_node.cpp)
 
 target_link_libraries(utils_tests ras_utils ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})

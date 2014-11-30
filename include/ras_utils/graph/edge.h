@@ -7,11 +7,11 @@ class Edge
 {
 public:
     Edge();
-    Edge(Node p1, Node p2, double cost);
+    Edge(const Node &p1, const Node &p2, double cost);
 
-    Node getP1();
-    Node getP2();
-    double getCost();
+    const Node& getP1() const;
+    const Node& getP2() const;
+    double getCost()    const;
 private:
     Node p1_, p2_;
     double cost_;

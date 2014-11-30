@@ -48,17 +48,30 @@
 #define COLOR_PURPLE    4
 
 // Object IDs
-#define OBJECT_RED_CUBE         "Red Cube"
-#define OBJECT_BLUE_CUBE        "Blue Cube"
-#define OBJECT_GREEN_CUBE       "Green Cube"
-#define OBJECT_YELLOW_CUBE      "Yellow Cube"
-#define OBJECT_YELLOW_BALL      "Yellow Ball"
-#define OBJECT_RED_BALL         "Red Ball"
-#define OBJECT_GREEN_CYLINDER   "Green Cylinder"
-#define OBJECT_BLUE_TRIANGLE    "Blue Triangle"
-#define OBJECT_PURPLE_CROSS     "Purple Cross"
-#define OBJECT_PATRIC           "Patric"
-#define OBJECT_UNKNOWN          "An Object"
+#define OBJECT_NAME_RED_CUBE         "Red Cube"
+#define OBJECT_NAME_BLUE_CUBE        "Blue Cube"
+#define OBJECT_NAME_GREEN_CUBE       "Green Cube"
+#define OBJECT_NAME_YELLOW_CUBE      "Yellow Cube"
+#define OBJECT_NAME_YELLOW_BALL      "Yellow Ball"
+#define OBJECT_NAME_RED_BALL         "Red Ball"
+#define OBJECT_NAME_GREEN_CYLINDER   "Green Cylinder"
+#define OBJECT_NAME_BLUE_TRIANGLE    "Blue Triangle"
+#define OBJECT_NAME_PURPLE_CROSS     "Purple Cross"
+#define OBJECT_NAME_PATRIC           "Patric"
+#define OBJECT_NAME_UNKNOWN          "An Object"
+
+// Object indices
+#define OBJECT_IDX_RED_CUBE         0
+#define OBJECT_IDX_BLUE_CUBE        1
+#define OBJECT_IDX_GREEN_CUBE       2
+#define OBJECT_IDX_YELLOW_CUBE      3
+#define OBJECT_IDX_YELLOW_BALL      4
+#define OBJECT_IDX_RED_BALL         5
+#define OBJECT_IDX_GREEN_CYLINDER   6
+#define OBJECT_IDX_BLUE_TRIANGLE    7
+#define OBJECT_IDX_PURPLE_CROSS     8
+#define OBJECT_IDX_PATRIC           9
+#define OBJECT_IDX_UNKNOWN          10
 
 // Coordinate frames
 #define COORD_FRAME_WORLD       "world"
@@ -78,13 +91,14 @@ namespace RAS_Names
 {
 const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data/"));
 const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string("/camera_extrinsic.txt"));
+const std::string GRAPH_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/graph_map.txt"));
 
     namespace Navigation_Modes
     {
         static const int NAVIGATION_WALL_FOLLOW = 1;
         static const int NAVIGATION_GO_OBJECT   = 2;
         static const int NAVIGATION_STOP        = 3;
-    }
+    }    
 }
 
 #endif

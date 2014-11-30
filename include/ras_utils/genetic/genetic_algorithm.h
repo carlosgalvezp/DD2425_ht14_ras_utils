@@ -5,9 +5,11 @@
 #include <ras_utils/genetic/individual.h>
 #include <ras_utils/graph/graph.h>
 #include <sys/time.h>
+#include <ctime>
+#include <queue>
 
 // ** CONFIGURATION PARAMETERS
-#define N_GENERATIONS 10000      // Number of generations
+#define N_GENERATIONS 5000      // Number of generations
 #define N_INDIVIDUALS 100       // Number of individuals per generation
 #define N_ELLITE      2         // Number of ellite individuals
 #define P_CROSSOVER   0.7       // Cross-over probability
@@ -26,7 +28,9 @@ class GeneticAlgorithm
 public:
     GeneticAlgorithm(const Graph &graph);
 
-    std::vector<int> computeSolution();
+    void computeSolution(std::vector<int> &path);
+    void computeSolution(std::vector<Node> &path);
+
     Individual &getBestIndividual();
 
 private:
@@ -48,7 +52,7 @@ private:
         void selection(Generation& newGeneration);
         void crossover(Generation &newGeneration);
             void coupleCrossover(Individual &parent1, Individual &parent2,
-                                       Individual& child1, Individual& child2);
+                                 Individual &child1, Individual &child2);
         void mutation(Generation& newGeneration);
         void evaluation2(Generation &newGeneration);
 

@@ -32,7 +32,8 @@ void testVector();
 
 int main()
 {
-    testVector();
+//    testVector();
+    testTSP();
     return 0;
 }
 
@@ -60,7 +61,8 @@ void testTSP()
     gettimeofday(&t1, NULL);
 
     GeneticAlgorithm gm(graph);
-    gm.computeSolution();
+    std::vector<Node> solution;
+    gm.computeSolution(solution);
 
     gettimeofday(&t2,NULL);
     std::cout << "Genetic Algorithm: "<< (t2.tv_sec - t1.tv_sec) +
@@ -81,7 +83,7 @@ void createGraph(double x_min, double x_max, double y_min, double y_max,
     for (unsigned int i = 0; i < n_nodes; i++)
     {
         Position p;
-        if (i == 0)
+        if (i == 0 || i == n_nodes-1)
             p = Position(0,0);
         else
             p = createPosition(x_min, x_max, y_min, y_max);
