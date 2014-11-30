@@ -91,7 +91,11 @@ namespace RAS_Names
 {
 const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data/"));
 const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string("/camera_extrinsic.txt"));
-const std::string GRAPH_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/graph_map.txt"));
+
+const std::string MAP_ROOT_PATH = (std::string(getenv("HOME")) + std::string("/map/"));
+const std::string RAW_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/raw_map.txt"));
+const std::string THICK_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/thick_map.txt"));
+const std::string TOPOLOGICAL_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/topological_map.txt"));
 
     namespace Navigation_Modes
     {
