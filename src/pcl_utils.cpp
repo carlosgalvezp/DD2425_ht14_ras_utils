@@ -15,26 +15,31 @@ void buildPointCloud(const cv::Mat &rgb_img, const cv::Mat &depth_img,
         // ** Construct point cloud
         cloud_out->resize(height*width);
 
-        int i = 0;
+        std::size_t actual_size = 0;
         for (unsigned int v = 0; v < rgb_img.rows; v+=step)
         {
             for (unsigned int u = 0; u < rgb_img.cols; u+=step)
             {
-                float z_m = depth_img.at<float>(v, u);
-                const cv::Vec3b& c = rgb_img.at<cv::Vec3b>(v, u);
-                pcl::PointXYZRGB& pt = cloud_out->points[i++];
+                float z = depth_img.at<float>(v, u);
+                if(z != 0 && !std::isnan(z))
+                {
+                    const cv::Vec3b& c = rgb_img.at<cv::Vec3b>(v, u);
+                    pcl::PointXYZRGB& pt = cloud_out->points[actual_size++];
 
-                pt.x = z_m * ((u - CX) * FX_INV);
-                pt.y = z_m * ((v - CY) * FY_INV);
-                pt.z = z_m;
-                pt.r = c[0];
-                pt.g = c[1];
-                pt.b = c[2];
+                    pt.x = z * ((u - CX) * FX_INV);
+                    pt.y = z * ((v - CY) * FY_INV);
+                    pt.z = z;
+                    pt.r = c[0];
+                    pt.g = c[1];
+                    pt.b = c[2];
+                }
             }
         }
-        cloud_out->width = width;
-        cloud_out->height = height;
+        cloud_out->resize(actual_size);
+        cloud_out->width = actual_size;
+        cloud_out->height = 1;
         cloud_out->is_dense = true;
+        cloud_out->header.frame_id = "camera_rgb_optical_frame";
     }
     else
     {

@@ -2,6 +2,9 @@
 
 GeneticAlgorithm::GeneticAlgorithm(const Graph& graph)
 {
+    // ** Set random seed
+    srand(std::time(NULL));
+
     graph_ = graph;
     n_nodes_ = graph.getNodeCount();
 
@@ -10,7 +13,19 @@ GeneticAlgorithm::GeneticAlgorithm(const Graph& graph)
         possibleNodes_.push_back(i);
 }
 
-std::vector<int> GeneticAlgorithm::computeSolution()
+void GeneticAlgorithm::computeSolution(std::vector<Node> &path)
+{
+    std::vector<int> path_idx;
+    this->computeSolution(path_idx);
+    // Transform from indexes to actual nodes
+    for(std::size_t i = 0; i < path_idx.size(); ++i)
+    {
+        const Node &n = this->graph_.getNodes()[path_idx[i]];
+        path.push_back(n);
+    }
+}
+
+void GeneticAlgorithm::computeSolution(std::vector<int> &path)
 {
     // ** Initialize population
     initializeGeneration();
@@ -28,9 +43,9 @@ std::vector<int> GeneticAlgorithm::computeSolution()
                                     <<" Best fitness: "<< bestFitness_
                   << " ["<< (t2.tv_usec - t1.tv_usec)/1000.0 << " ms]"<<std::endl;
     }
-    // ** Get the best individual and return the solution
-    std::vector<int> s;
-    return s;
+    // ** Get best individual
+    Individual &best = this->getBestIndividual();
+    path = best.getGenes();
 }
 
 Individual& GeneticAlgorithm::getBestIndividual(){return bestIndividual_;}
@@ -53,8 +68,8 @@ void GeneticAlgorithm::initializeGeneration()
 Individual GeneticAlgorithm::createRandomIndividual()
 {
     std::vector<int> path(possibleNodes_);
-    std::random_shuffle(path.begin()+1, path.end()); //The origin is always the (0,0) point
-
+    std::random_shuffle(path.begin()+1, path.end()-1); //The origin and end is always the (0,0) point
+    std::cout << "First: "<<path[0] <<"; Last: "<<path[path.size()-1]<<std::endl;
     double cost = graph_.computePathCost(path);
     Individual individual(path, 1.0/cost);
     individual.print();
@@ -67,7 +82,7 @@ void GeneticAlgorithm::evolveGeneration()
     newGeneration.population_.clear();
     newGeneration.total_fitness_ = 0.0;
     newGeneration.cum_distribution_ = std::vector<double>(currentGeneration_.cum_distribution_.size());
-    // ** Evaluation
+    // ** Evaluation (In order to compute survival probabilities)
     evaluation();
 
     // ** Ellite selection
@@ -83,7 +98,7 @@ void GeneticAlgorithm::evolveGeneration()
     // ** Mutation
     mutation(newGeneration);
 
-    // ** Evaluation2
+    // ** Evaluation2 (In order to select the best individual)
     evaluation2(newGeneration);
 
     // ** Update current population

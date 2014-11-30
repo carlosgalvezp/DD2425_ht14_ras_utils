@@ -32,16 +32,16 @@ void Individual::setFitness(double fitness) {fitness_= fitness;}
 
 double Individual::getProbability()                 const {return probability_;}
 double Individual::getFitness()                     const {return fitness_; }
-std::vector<int>& Individual::getGenes()                  {return genes_;}
+std::vector<int> &Individual::getGenes() {return genes_;}
 
 void Individual::mutate()
 {
     bool finished(false);
     while (!finished)
     {
-        // Generate two random positions between 1 and genes.size() - 1
-        int p1 = rand() % (genes_.size() - 1) + 1;
-        int p2 = rand() % (genes_.size() - 1) + 1;
+        // Generate two random positions between 1 and genes.size() - 2 (don't consider start and end)
+        int p1 = rand() % (genes_.size() - 2) + 1;
+        int p2 = rand() % (genes_.size() - 2) + 1;
 
         // Swap positions
         if (p1 != p2)

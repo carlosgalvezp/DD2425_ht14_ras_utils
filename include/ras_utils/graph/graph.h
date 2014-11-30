@@ -2,7 +2,7 @@
 #define GRAPH_H
 
 #include <ras_utils/graph/edge.h>
-
+#include <algorithm>
 #include <vector>
 
 #include <Eigen/Core>
@@ -10,7 +10,10 @@ class Graph
 {
 public:
     Graph();
-    Graph(std::vector<Node> nodes, std::vector<Edge> edges, Eigen::MatrixXd costs);
+    Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges);
+    Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges, const Eigen::MatrixXd &costs);
+
+    void computeCostMatrix(const std::vector<Node> &nodes, const std::vector<Edge> &edges, Eigen::MatrixXd &costs);
 
     std::vector<Node> getNodes() const;
     std::vector<Edge> getEdges() const;
@@ -21,12 +24,18 @@ public:
     void setEdges(std::vector<Edge> edges);
 
     double computePathCost(std::vector<int>& path) const;
-
 private:
     std::vector<Node> nodes_;
     std::vector<Edge> edges_;
 
     Eigen::MatrixXd cost_matrix_;
 };
+
+namespace Graph_Utils
+{
+    void readGraph(const std::string &path, Graph &graph);
+
+}
+
 
 #endif // GRAPH_H

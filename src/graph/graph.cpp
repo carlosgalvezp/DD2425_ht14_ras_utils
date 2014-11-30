@@ -4,12 +4,43 @@ Graph::Graph()
 {
 }
 
-Graph::Graph(std::vector<Node> nodes, std::vector<Edge> edges, Eigen::MatrixXd cost_matrix)
+Graph::Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges)
 {
-    nodes_ = nodes;
-    edges_ = edges;
+    this->nodes_ = nodes;
+    this->edges_ = edges;
 
-    cost_matrix_ = cost_matrix;
+    // ** Compute cost matrix
+    computeCostMatrix(nodes, edges,this->cost_matrix_);
+}
+
+Graph::Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges, const Eigen::MatrixXd &cost_matrix)
+{
+    this->nodes_ = nodes;
+    this->edges_ = edges;
+    this->cost_matrix_ = cost_matrix;
+}
+
+void Graph::computeCostMatrix(const std::vector<Node> &nodes, const std::vector<Edge> &edges, Eigen::MatrixXd &costs)
+{
+    // ** Init to infinite cost
+    costs = std::numeric_limits<double>::infinity()*Eigen::MatrixXd::Identity(nodes.size(), nodes.size());
+
+    // ** Loop over the edges and update the cost
+    for(std::size_t i = 0; i < edges.size(); ++i)
+    {
+        const Edge &e = edges[i];
+        const Node &n1 = e.getP1();
+        const Node &n2 = e.getP2();
+
+        std::size_t idx1 = std::find(nodes.begin(), nodes.end(), n1) - nodes.begin();
+        std::size_t idx2 = std::find(nodes.begin(), nodes.end(), n1) - nodes.begin();
+
+        if(idx1 != nodes.size() && idx2 != nodes.size())
+        {
+            costs(idx1,idx2) = e.getCost();
+            costs(idx2,idx1) = e.getCost();
+        }
+    }
 }
 
 std::vector<Node> Graph::getNodes() const   { return nodes_;       }
@@ -29,4 +60,13 @@ double Graph::computePathCost(std::vector<int>& path) const
         cost += cost_matrix_(path.at(i), path.at(i+1));
     }
     return cost;
+}
+
+namespace Graph_Utils
+{
+void readGraph(const std::string &path, Graph &graph)
+{
+    std::cerr << "[Graph::readGraph] TO DO"<<std::endl;
+}
+
 }

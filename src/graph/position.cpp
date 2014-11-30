@@ -15,3 +15,8 @@ double Position::euclideanDistance(Position p1, Position p2)
     return sqrt( (p1.x_ - p2.x_)*(p1.x_ - p2.x_) +
                  (p1.y_ - p2.y_)*(p1.y_ - p2.y_) );
 }
+
+bool Position::operator ==(const Position &obj) const
+{
+    return ( (this->x_ == obj.x_) && (this->y_ == obj.y_) );
+}

@@ -11,6 +11,8 @@ public:
 
     static double euclideanDistance(Position p1, Position p2);
 
+    bool operator==(const Position &obj) const;
+
     double x_;
     double y_;
 };
