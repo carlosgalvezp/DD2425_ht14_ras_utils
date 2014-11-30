@@ -20,6 +20,8 @@ public:
     std::size_t getNodeCount()   const;
     std::size_t getEdgeCount()   const;
 
+    std::vector<Edge> getEdges(const Node &node) const;
+
     void setNodes(std::vector<Node> nodes);
     void setEdges(std::vector<Edge> edges);
 

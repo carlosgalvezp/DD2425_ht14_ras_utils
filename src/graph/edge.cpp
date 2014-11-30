@@ -17,3 +17,12 @@ Edge::Edge(const Node& p1, const Node& p2, double cost)
 const Node& Edge::getP1() const {    return p1_;}
 const Node& Edge::getP2() const {    return p2_;}
 double Edge::getCost()    const {    return cost_;}
+
+const Node& Edge::getOther(const Node &node) const
+{
+    if(node == p1_) {
+        return getP2();
+    } else {
+        return getP1();
+    }
+}

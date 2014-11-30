@@ -12,6 +12,9 @@ public:
     const Node& getP1() const;
     const Node& getP2() const;
     double getCost()    const;
+
+    // If parameter is P1 then P2 is returned and vice versa
+    const Node& getOther(const Node &node) const;
 private:
     Node p1_, p2_;
     double cost_;
