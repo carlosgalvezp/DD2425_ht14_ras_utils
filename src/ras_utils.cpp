@@ -105,5 +105,8 @@ namespace RAS_Utils
         return fabs(x-mu)/sigma;
     }
 
-
+    double normalize_angle(double angle)
+    {
+        return fmod( angle+M_PI, 2 * M_PI ) - M_PI;
+    }
 }

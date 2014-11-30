@@ -33,6 +33,8 @@ double std(const std::vector<double> &data);
 
 double mahalanobis_distance(const double &x, const double &mu, const double &sigma);
 
+double normalize_angle( double angle );
+
 template<typename T>
 T get_most_repeated(const typename std::vector<T> &vector)
 {
