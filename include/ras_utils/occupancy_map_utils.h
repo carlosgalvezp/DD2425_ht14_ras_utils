@@ -57,22 +57,24 @@ void saveMap(const nav_msgs::OccupancyGrid &grid_data, const std::string &path)
     // data[1]
     // ...
     // data[N-1]
+    std::cout << "====== STARTING SAVING MAP =======" <<std::endl;
     std::ofstream file;
     file.open(path);
     file << grid_data.info.height               << " "
          << grid_data.info.width                << " "
          << grid_data.info.resolution           << " "
          << grid_data.info.origin.position.x    << " "
-         << grid_data.info.origin.position.y;
+         << grid_data.info.origin.position.y << "\n";
 
     std::size_t N = grid_data.info.width * grid_data.info.height / grid_data.info.resolution;
 
     for(unsigned int i = 0; i < N; ++i)
     {
-        file << grid_data.data[i] << "\n";
+        file << grid_data.data[i] << " ";
     }
 
     file.close();
+    std::cout << "====== FINISHED SAVING MAP =======" <<std::endl;
 }
 
 void loadMap(const std::string &path, nav_msgs::OccupancyGrid &grid_data)

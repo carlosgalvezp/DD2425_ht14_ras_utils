@@ -21,6 +21,7 @@
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
 #define TOPIC_MAP_OCC_GRID              "/map/occ_grid_rviz"
 #define TOPIC_MAP_OCC_GRID_THICK        "/map/occ_grid_thick"
+#define TOPIC_MAP_SAVE                  "/map/save"
 
 #define TOPIC_SPEAKER                   "/espeak/string"
 #define TOPIC_EVIDENCE                  "/evidence"
@@ -30,7 +31,7 @@
 #define TOPIC_OBSTACLE                  "/obstacle"
 #define TOPIC_IMU                       "/imu/data"
 #define TOPIC_MARKERS                   "/map_markers"
-#define TOPIC_ENCODERS                  "/arduino/encoders"
+
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
