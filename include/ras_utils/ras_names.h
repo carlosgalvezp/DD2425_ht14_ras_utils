@@ -38,8 +38,8 @@
 #define SRV_NAVIGATION_IN               "/navigation/comm"
 
 // 3D Shapes
-#define SHAPE_3D_CUBE      0
-#define SHAPE_3D_BALL      1
+#define SHAPE_3D_BALL      0
+#define SHAPE_3D_CUBE      1
 #define SHAPE_3D_OTHER     2
 
 // Colors
