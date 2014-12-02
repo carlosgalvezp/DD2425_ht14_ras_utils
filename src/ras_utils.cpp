@@ -109,4 +109,18 @@ namespace RAS_Utils
     {
         return fmod( angle+M_PI, 2 * M_PI ) - M_PI;
     }
+
+    void normalize_probabilities(std::vector<double> &prob)
+    {
+        double sum = 0;
+        for(std::size_t i= 0; i< prob.size();++i)
+        {
+            sum += prob[i];
+        }
+
+        for(std::size_t i = 0; i<  prob.size();++i)
+        {
+            prob[i] /= sum;
+        }
+    }
 }
