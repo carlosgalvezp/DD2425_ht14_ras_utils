@@ -35,6 +35,8 @@ double mahalanobis_distance(const double &x, const double &mu, const double &sig
 
 double normalize_angle( double angle );
 
+void normalize_probabilities(std::vector<double> &prob);
+
 template<typename T>
 T get_most_repeated(const typename std::vector<T> &vector)
 {
@@ -69,6 +71,29 @@ T get_most_repeated(const typename std::vector<T> &vector)
         }
     }
     return maxResult;
+}
+
+
+template<typename Iterator>
+double L2(Iterator begin, Iterator end)
+{
+    double result = 0.0;
+    for(Iterator it =  begin; it < end; ++it)
+    {
+        result += (*it) * (*it);
+    }
+    return sqrt(result);
+}
+
+template<typename Iterator>
+double dotProduct(Iterator begin1, Iterator end1, Iterator begin2, Iterator end2)
+{
+    double result = 0.0;
+    for(Iterator it1 =  begin1, it2 = begin2; it1 < end1, it2 < end2; ++it1, ++it2)
+    {
+        result += (*it1) * (*it2);
+    }
+    return result;
 }
 
 }
