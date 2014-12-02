@@ -188,10 +188,6 @@ namespace bfs_search
 
             Traveler current_traveler = bfs_queue.top();
             bfs_queue.pop();
-
-            if(current_traveler.cost < prevCost){
-                std::cout << prevCost << " || " << current_traveler.cost  << std::endl;
-            }
             prevCost = current_traveler.cost;
 
             int current_cell_cost = occ_grid.data[current_traveler.index];
@@ -238,13 +234,14 @@ namespace bfs_search
         while(next_index != -1)
         {
             geometry_msgs::Point point;
-            point.x = 2;
-            point.y = 2;
+            double real_x, real_y;
+            convertToRealPos(occ_grid, real_x, real_y, next_index);
+            point.x = real_x;
+            point.y = real_y;
             best_path[vector_pos] = point;
             next_index = cheapest_next_neighbour[next_index];
+            vector_pos--;
         }
-
-        std::cout << "Exiting...\n";
         return best_path;
     }
 
