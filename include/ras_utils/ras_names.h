@@ -32,6 +32,7 @@
 #define TOPIC_IMU                       "/imu/data"
 #define TOPIC_MARKERS                   "/map_markers"
 
+#define TOPIC_OBJECT_POSITION           "/object_detection/position"
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
