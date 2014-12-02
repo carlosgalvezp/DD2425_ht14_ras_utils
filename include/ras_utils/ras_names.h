@@ -98,7 +98,7 @@ const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string(
 const std::string MAP_ROOT_PATH = (std::string(getenv("HOME")) + std::string("/map/"));
 const std::string RAW_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/raw_map.txt"));
 const std::string THICK_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/thick_map.txt"));
-const std::string TOPOLOGICAL_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/topological_map.txt"));
+const std::string OBJECT_MAP_PATH = (std::string(getenv("HOME")) + std::string("/map/object_map.txt"));
 
     namespace Navigation_Modes
     {
