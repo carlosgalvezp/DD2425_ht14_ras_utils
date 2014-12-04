@@ -79,60 +79,6 @@ bool isWall(const nav_msgs::OccupancyGrid & grid_data, double x, double y)
     return getValue(grid_data, x, y) == OCC_GRID_SIMPLE_BLOCKED_AREA;
 }
 
-void saveMap(const nav_msgs::OccupancyGrid &grid_data, const std::string &path)
-{
-    // Format:
-    // height width resolution origin_x origin_y
-    // data[0]
-    // data[1]
-    // ...
-    // data[N-1]
-    std::cout << "====== STARTING SAVING MAP =======" <<std::endl;
-    std::ofstream file;
-    file.open(path);
-    file << grid_data.info.height               << " "
-         << grid_data.info.width                << " "
-         << grid_data.info.resolution           << " "
-         << grid_data.info.origin.position.x    << " "
-         << grid_data.info.origin.position.y << "\n";
-
-    std::size_t N = grid_data.info.width * grid_data.info.height / grid_data.info.resolution;
-
-    for(unsigned int i = 0; i < N; ++i)
-    {
-        file << grid_data.data[i] << " ";
-    }
-
-    file.close();
-    std::cout << "====== FINISHED SAVING MAP =======" <<std::endl;
-}
-
-void loadMap(const std::string &path, nav_msgs::OccupancyGrid &grid_data)
-{
-    // Format:
-    // height width resolution origin_x origin_y
-    // data[0]
-    // data[1]
-    // ...
-    // data[N-1]
-    std::ifstream file;
-    file.open(path);
-    file >> grid_data.info.height
-         >> grid_data.info.width
-         >> grid_data.info.resolution
-         >> grid_data.info.origin.position.x
-         >> grid_data.info.origin.position.y;
-
-    std::size_t N = grid_data.info.width * grid_data.info.height / grid_data.info.resolution;
-
-    for(unsigned int i = 0; i < N; ++i)
-    {
-        file >> grid_data.data[i];
-    }
-
-    file.close();
-}
-
 namespace bfs_search
 {
 

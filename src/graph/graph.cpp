@@ -4,6 +4,13 @@ Graph::Graph()
 {
 }
 
+Graph::Graph(const Graph& src)
+{
+    this->nodes_ = src.nodes_;
+    this->edges_ = src.edges_;
+    this->cost_matrix_ = src.cost_matrix_;
+}
+
 Graph::Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges)
 {
     this->nodes_ = nodes;
@@ -32,14 +39,8 @@ void Graph::computeCostMatrix(const std::vector<Node> &nodes, const std::vector<
         const Node &n1 = e.getP1();
         const Node &n2 = e.getP2();
 
-        std::size_t idx1 = std::find(nodes.begin(), nodes.end(), n1) - nodes.begin();
-        std::size_t idx2 = std::find(nodes.begin(), nodes.end(), n1) - nodes.begin();
-
-        if(idx1 != nodes.size() && idx2 != nodes.size())
-        {
-            costs(idx1,idx2) = e.getCost();
-            costs(idx2,idx1) = e.getCost();
-        }
+        costs(n1.getID(),n2.getID()) = e.getCost();
+        costs(n2.getID(),n1.getID()) = e.getCost();
     }
 }
 
@@ -78,9 +79,44 @@ double Graph::computePathCost(std::vector<int>& path) const
 
 namespace Graph_Utils
 {
-void readGraph(const std::string &path, Graph &graph)
-{
-    std::cerr << "[Graph::readGraph] TO DO"<<std::endl;
-}
+    void readGraph(const std::string &path, Graph &graph)
+    {
+        std::vector<Node> nodes;
+        std::vector<Edge> edges;
+
+        std::ifstream file;
+        file.open(path);
+
+        // ** Number of nodes
+        int N;
+        file >> N;
+
+        // ** Nodes' positions
+        for(std::size_t i = 0; i < N; ++i)
+        {
+            double x,y;
+            file >> x >> y;
+            Node n(x,y,i);
+            nodes.push_back(n);
+        }
+
+        // ** Edges
+        int n_edges = N*(N-1)/2.0;
+        for(std::size_t i = 0; i < n_edges; ++i)
+        {
+            int n1, n2;
+            double cost;
+            file >> n1 >> n2 >> cost;
+            Edge e(nodes[n1], nodes[n2], cost);
+            std::cout << "CREATING EDGE BETWEEN "<<n1 << " and " << n2<<"; Cost: "<<cost<<std::endl;
+            edges.push_back(e);
+        }
+
+        // ** Create graph
+        graph = Graph(nodes, edges);
+
+        std::clog << "Created a graph with " << graph.getNodeCount() << " nodes and "
+                  << graph.getEdgeCount() << " edges" << std::endl;
+    }
 
 }

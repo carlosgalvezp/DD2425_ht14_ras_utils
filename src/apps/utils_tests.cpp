@@ -50,8 +50,7 @@ void testTSP()
     // ** Create a graph
     Graph graph;
     createGraph(X_MIN, X_MAX, Y_MIN, Y_MAX, N_NODES, graph);
-    std::clog << "Created a graph with " << graph.getNodeCount() << " nodes and "
-                                         << graph.getEdgeCount() << " edges" << std::endl;
+//    Graph_Utils::readGraph(RAS_Names::OBJECT_GRAPH_PATH, graph);
 
     // ** Visualize the graph
     visualizeGraph(graph);
@@ -96,12 +95,11 @@ void createGraph(double x_min, double x_max, double y_min, double y_max,
     Eigen::MatrixXd cost_m(nodes.size(), nodes.size());
     for (unsigned int i = 0; i < n_nodes; i++)
     {
-        for(unsigned int j = i; j < n_nodes; j++)
+        for(unsigned int j = i+1; j < n_nodes; j++)
         {
             Node n1 = nodes.at(i);
             Node n2 = nodes.at(j);
             double cost = Position::euclideanDistance(n1.getPosition(), n2.getPosition());
-
             Edge e(n1, n2, cost);
             edges.push_back(e);
 

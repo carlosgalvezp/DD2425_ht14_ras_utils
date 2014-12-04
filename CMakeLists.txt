@@ -179,7 +179,7 @@ link_libraries(${PCL_LIBRARIES})
 
 # Define a library target
 FILE(GLOB SOURCES src/*.cpp src/genetic/*.cpp src/graph/*.cpp)
-FILE(GLOB HEADERS include/${PROJECT_NAME}/*.h)
+FILE(GLOB_RECURSE HEADERS include/${PROJECT_NAME}/*.h)
 
 add_library(ras_utils ${SOURCES} ${HEADERS})
 add_library(pcl_utils src/pcl_utils.cpp include/${PROJECT_NAME}/pcl_utils.h)

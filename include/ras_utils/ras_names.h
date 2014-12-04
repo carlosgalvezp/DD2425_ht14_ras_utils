@@ -41,6 +41,9 @@
 // Parameter server
 #define PARAM_PHASE                     "/Phase"
 
+// Rviz namespaces
+#define RVIZ_MARKER_NS_OBJECT           "Objects"
+
 // 3D Shapes
 #define SHAPE_3D_CUBE      0
 #define SHAPE_3D_BALL      1
@@ -101,7 +104,10 @@ const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string(
 const std::string MAP_ROOT_PATH = (std::string(getenv("HOME")) + std::string("/map/"));
 const std::string THICK_MAP_DATA_PATH = MAP_ROOT_PATH + std::string("thick_map.txt");
 const std::string THICK_MAP_METADATA_PATH = MAP_ROOT_PATH  + std::string("thick_map_metadata.txt");
-const std::string OBJECT_MAP_PATH = MAP_ROOT_PATH + std::string("object_map.txt");
+
+const std::string OBJECT_GRAPH_PATH = MAP_ROOT_PATH + std::string("object_graph.txt");
+const std::string OBJECT_POSITIONS_PATH = MAP_ROOT_PATH + std::string("object_positions.txt");
+const std::string OBJECT_BEST_PATH_PATH = MAP_ROOT_PATH + std::string("object_path.txt");
 
     namespace Navigation_Modes
     {
