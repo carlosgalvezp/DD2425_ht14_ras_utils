@@ -38,6 +38,9 @@
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
 
+// Parameter server
+#define PARAM_PHASE                     "/Phase"
+
 // 3D Shapes
 #define SHAPE_3D_CUBE      0
 #define SHAPE_3D_BALL      1
