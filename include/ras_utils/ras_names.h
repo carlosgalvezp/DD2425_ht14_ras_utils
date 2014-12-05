@@ -31,8 +31,10 @@
 #define TOPIC_OBSTACLE                  "/obstacle"
 #define TOPIC_IMU                       "/imu/data"
 #define TOPIC_MARKERS                   "/map_markers"
+#define TOPIC_OBJECT_MARKERS            "/map_object_markers"
+#define TOPIC_OBJECTS_EKF               "/object_detection/objects_ekf"
 
-#define TOPIC_OBJECT_POSITION           "/object_detection/position"
+#define TOPIC_ROBOT_OBJECT_POSITION           "/object_detection/robot_position"
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"

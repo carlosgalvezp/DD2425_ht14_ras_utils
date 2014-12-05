@@ -18,6 +18,7 @@ Graph::Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges)
 
     // ** Compute cost matrix
     computeCostMatrix(nodes, edges,this->cost_matrix_);
+    std::cout << "COST MATRIX\n" << cost_matrix_<<std::endl;
 }
 
 Graph::Graph(const std::vector<Node> &nodes, const std::vector<Edge> &edges, const Eigen::MatrixXd &cost_matrix)

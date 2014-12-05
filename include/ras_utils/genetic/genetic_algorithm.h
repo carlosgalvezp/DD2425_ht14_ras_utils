@@ -9,7 +9,7 @@
 #include <queue>
 
 // ** CONFIGURATION PARAMETERS
-#define N_GENERATIONS 5000      // Number of generations
+#define N_GENERATIONS 2000      // Number of generations
 #define N_INDIVIDUALS 100       // Number of individuals per generation
 #define N_ELLITE      2         // Number of ellite individuals
 #define P_CROSSOVER   0.7       // Cross-over probability
