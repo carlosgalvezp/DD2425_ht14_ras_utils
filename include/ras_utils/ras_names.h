@@ -42,6 +42,7 @@
 
 // Parameter server
 #define PARAM_PHASE                     "/Phase"
+#define PARAM_CONTEST                   "/Contest"
 
 // Rviz namespaces
 #define RVIZ_MARKER_NS_OBJECT           "Objects"
@@ -85,13 +86,10 @@
 #define OBJECT_IDX_UNKNOWN          10
 
 // Coordinate frames
-#define COORD_FRAME_WORLD       "world"
-#define COORD_FRAME_ROBOT       "robot"
-
-
-
-
-
+#define COORD_FRAME_WORLD               "world"
+#define COORD_FRAME_ROBOT               "robot"
+#define COORD_FRAME_CAMERA_LINK         "camera_link"
+#define COORD_FRAME_CAMERA_RGB_OPTICAL  "camera_rgb_optical_frame"
 
 
 // ===========================================================================
@@ -100,16 +98,23 @@
 // Paths where we store or read data
 namespace RAS_Names
 {
-const std::string models_3D_path = (std::string(getenv("HOME")) + std::string("/3d_data_train/"));
-const std::string CALIBRATION_PATH = (std::string(getenv("HOME")) + std::string("/camera_extrinsic.txt"));
+const std::string HOME = std::string(getenv("HOME"));
+const std::string PROJECT_DATA_ROOT = HOME + std::string("/DD2425_Data/");
 
-const std::string MAP_ROOT_PATH = (std::string(getenv("HOME")) + std::string("/map/"));
+const std::string MODELS_3D_PATH =   PROJECT_DATA_ROOT + std::string("3d_data_train/");
+const std::string CALIBRATION_PATH = PROJECT_DATA_ROOT + std::string("cam_calibration/tf_robot_to_camera_link.txt");
+
+const std::string MAP_ROOT_PATH = PROJECT_DATA_ROOT + std::string("map/") ;
 const std::string THICK_MAP_DATA_PATH = MAP_ROOT_PATH + std::string("thick_map.png");
 const std::string THICK_MAP_METADATA_PATH = MAP_ROOT_PATH  + std::string("thick_map_metadata.txt");
 
 const std::string OBJECT_GRAPH_PATH = MAP_ROOT_PATH + std::string("object_graph.txt");
 const std::string OBJECT_POSITIONS_PATH = MAP_ROOT_PATH + std::string("object_positions.txt");
 const std::string OBJECT_BEST_PATH_PATH = MAP_ROOT_PATH + std::string("object_path.txt");
+
+const std::string HSV_PARAMS_ROOT_PATH = PROJECT_DATA_ROOT + std::string("HSV/");
+const std::string HSV_PARAMS_LAB       = HSV_PARAMS_ROOT_PATH + std::string("lab.txt");
+const std::string HSV_PARAMS_CONTEST   = HSV_PARAMS_ROOT_PATH + std::string("contest.txt");
 
     namespace Navigation_Modes
     {

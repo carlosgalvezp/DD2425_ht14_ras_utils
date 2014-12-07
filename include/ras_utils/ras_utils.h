@@ -8,6 +8,7 @@
 #include "ros/ros.h"
 #include <ras_srv_msgs/Command.h>
 #include <ras_utils/ras_names.h>
+
 #include <algorithm>
 
 #define PRINT_PADDING 5
@@ -36,8 +37,6 @@ double euclidean_distance(double x1, double y1, double x2, double y2 );
 double normalize_angle( double angle );
 
 void normalize_probabilities(std::vector<double> &prob);
-
-
 
 template<typename T>
 T get_most_repeated(const typename std::vector<T> &vector)

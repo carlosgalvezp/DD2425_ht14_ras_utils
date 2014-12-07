@@ -39,7 +39,47 @@ void buildPointCloud(const cv::Mat &rgb_img, const cv::Mat &depth_img,
         cloud_out->width = actual_size;
         cloud_out->height = 1;
         cloud_out->is_dense = true;
-        cloud_out->header.frame_id = "camera_rgb_optical_frame";
+        cloud_out->header.frame_id = COORD_FRAME_CAMERA_LINK;
+    }
+    else
+    {
+        std::cout << "[Build Point Cloud] The input Ptr is 0"<<std::endl;
+    }
+}
+
+void buildPointCloud(const cv::Mat &depth_img,
+                     pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out, double scale_factor)
+{
+    if(cloud_out != 0)
+    {
+        int height = depth_img.rows * scale_factor;
+        int width  = depth_img.cols * scale_factor;
+        int step = 1.0 / scale_factor;
+
+        // ** Construct point cloud
+        cloud_out->resize(height*width);
+
+        std::size_t actual_size = 0;
+        for (unsigned int v = 0; v < depth_img.rows; v+=step)
+        {
+            for (unsigned int u = 0; u < depth_img.cols; u+=step)
+            {
+                float z = depth_img.at<float>(v, u);
+                if(z != 0 && !std::isnan(z))
+                {
+                    pcl::PointXYZ& pt = cloud_out->points[actual_size++];
+
+                    pt.x = z * ((u - CX) * FX_INV);
+                    pt.y = z * ((v - CY) * FY_INV);
+                    pt.z = z;
+                }
+            }
+        }
+        cloud_out->resize(actual_size);
+        cloud_out->width = actual_size;
+        cloud_out->height = 1;
+        cloud_out->is_dense = true;
+        cloud_out->header.frame_id = COORD_FRAME_CAMERA_LINK;
     }
     else
     {
@@ -95,6 +135,55 @@ double euclideanDistance(const pcl::PointXYZ &p1, const pcl::PointXYZ &p2)
 double euclideanDistance(const pcl::PointXY &p1, const pcl::PointXY &p2)
 {
     return sqrt( (p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+}
+
+
+bool readTransform(const std::string &frame_from,
+                   const std::string &frame_to,
+                   const tf::TransformListener &tf_listener,
+                   tf::Transform &tf)
+{
+    tf::StampedTransform transform;
+    try
+    {
+        tf_listener.lookupTransform(frame_from, frame_to,ros::Time(0), transform);
+        tf.setRotation(transform.getRotation());
+        tf.setOrigin(transform.getOrigin());
+        return true;
+    }
+    catch (tf::TransformException ex)
+    {
+        ROS_ERROR("%s",ex.what());
+        return false;
+    }
+}
+
+void convertEigen4x4ToTransform(const Eigen::Matrix4f &tf_eigen, tf::Transform &tf_transform)
+{
+    tf::Vector3 origin;
+    tf::Matrix3x3 tf3d;
+    origin.setValue(tf_eigen(0,3), tf_eigen(1,3), tf_eigen(2,3));
+
+    tf3d.setValue(tf_eigen(0,0),  tf_eigen(0,1),  tf_eigen(0,2),
+                  tf_eigen(1,0),  tf_eigen(1,1),  tf_eigen(1,2),
+                  tf_eigen(2,0),  tf_eigen(2,1),  tf_eigen(2,2));
+
+    tf::Quaternion q;
+    tf3d.getRotation(q);
+
+    tf_transform.setOrigin(origin);
+    tf_transform.setRotation(q);
+}
+
+void convertTransformToEigen4x4(const tf::Transform &tf_transform, Eigen::Matrix4f &tf_eigen)
+{
+    tf::Vector3 origin = tf_transform.getOrigin();
+    tf::Matrix3x3 rotation(tf_transform.getRotation());
+
+    tf_eigen << rotation[0][0] , rotation[0][1] , rotation[0][2] , origin[0],
+                rotation[1][0] , rotation[1][1] , rotation[1][2] , origin[1],
+                rotation[2][0] , rotation[2][1] , rotation[2][2] , origin[2],
+                0              , 0              , 0              , 1;
 }
 
 }
