@@ -1,6 +1,7 @@
 #ifndef RAS_NAMES_H
 #define RAS_NAMES_H
 #include <string>
+#include <vector>
 
 #define GROUP_NUMBER 6
 // In this file we define the name of all the nodes and topics. Convention:
@@ -34,8 +35,7 @@
 #define TOPIC_OBJECT_MARKERS            "/map_object_markers"
 #define TOPIC_OBJECTS_EKF               "/object_detection/objects_ekf"
 
-#define TOPIC_ROBOT_OBJECT_POSITION           "/object_detection/robot_position"
-
+#define TOPIC_ROBOT_OBJECT_POSITION     "/object_detection/robot_position"
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
@@ -102,6 +102,10 @@ const std::string HOME = std::string(getenv("HOME"));
 const std::string PROJECT_DATA_ROOT = HOME + std::string("/DD2425_Data/");
 
 const std::string MODELS_3D_PATH =   PROJECT_DATA_ROOT + std::string("3d_data_train/");
+const std::vector<std::string> MODELS_3D_NAMES = {"cube", "ball"};
+const std::vector<std::string> COLOR_NAMES = {"red", "green", "blue", "yellow", "purple"};
+
+
 const std::string CALIBRATION_PATH = PROJECT_DATA_ROOT + std::string("cam_calibration/tf_robot_to_camera_link.txt");
 
 const std::string MAP_ROOT_PATH = PROJECT_DATA_ROOT + std::string("map/") ;
