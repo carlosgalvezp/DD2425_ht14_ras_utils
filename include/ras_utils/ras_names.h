@@ -36,6 +36,7 @@
 #define TOPIC_OBJECTS_EKF               "/object_detection/objects_ekf"
 
 #define TOPIC_ROBOT_OBJECT_POSITION     "/object_detection/robot_position"
+#define TOPIC_OBSTACLE_LASER_MAP        "/obstacle_detection/laser"
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
