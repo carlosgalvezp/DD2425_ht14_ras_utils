@@ -16,7 +16,10 @@
 #define NODE_NAVIGATION                 "navigation"
 
 // Topic names
-#define TOPIC_ARDUINO_ADC               "/arduino/adc"
+#define TOPIC_ARDUINO_ADC               "/arduino/adc" // Swap this and the one below!!
+#define TOPIC_ARDUINO_ADC_RAW           "/arduino/ir_m_filtered"
+#define TOPIC_ARDUINO_M_NOT_FILTERED    "/arduino/ir_m_not_filtered"
+
 #define TOPIC_ODOMETRY                  "/robot/odometry"
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
@@ -37,6 +40,9 @@
 
 #define TOPIC_ROBOT_OBJECT_POSITION     "/object_detection/robot_position"
 #define TOPIC_OBSTACLE_LASER_MAP        "/obstacle_detection/laser"
+
+
+
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"

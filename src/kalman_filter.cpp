@@ -59,3 +59,11 @@ void KalmanFilter::filter(const Eigen::VectorXd& u,
     x_new = mu_;
     sigma_new = sigma_;
 }
+
+void KalmanFilter::filter(const Eigen::VectorXd &z, Eigen::VectorXd &x_new)
+{
+    Eigen::VectorXd v_dummy(B_.cols());
+    Eigen::MatrixXd m_dummy(sigma_.rows(), sigma_.cols());
+
+    this->filter(v_dummy, z, x_new, m_dummy);
+}

@@ -21,6 +21,7 @@ public:
                  const Eigen::MatrixXd& Q
                  );
     void filter(const Eigen::VectorXd &u, const Eigen::VectorXd& z, Eigen::VectorXd& x_new, Eigen::MatrixXd &sigma_new);
+    void filter(const Eigen::VectorXd& z, Eigen::VectorXd& x_new);
 
 private:
     Eigen::VectorXd mu_;     // state mean
