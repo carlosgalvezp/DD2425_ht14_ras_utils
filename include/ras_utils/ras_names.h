@@ -101,7 +101,11 @@ namespace RAS_Names
 const std::string HOME = std::string(getenv("HOME"));
 const std::string PROJECT_DATA_ROOT = HOME + std::string("/DD2425_Data/");
 
-const std::string MODELS_3D_PATH =   PROJECT_DATA_ROOT + std::string("3d_data_train/");
+const std::string MODELS_3D_PATH    =   PROJECT_DATA_ROOT + std::string("3d_data_train/");
+const std::string MODELS_COLOR_ROOT =   PROJECT_DATA_ROOT + std::string("color_data/");
+const std::string MODELS_COLOR_PATH =   MODELS_COLOR_ROOT + std::string("models.txt");
+
+
 const std::vector<std::string> MODELS_3D_NAMES = {"cube", "ball"};
 const std::vector<std::string> COLOR_NAMES = {"red", "green", "blue", "yellow", "purple"};
 
