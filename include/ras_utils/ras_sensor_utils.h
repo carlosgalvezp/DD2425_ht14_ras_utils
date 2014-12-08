@@ -10,6 +10,9 @@ namespace sensors
 
 #define MAX_DIST_SIDE_WALL 25
 
+#define SHORT_SENSOR_DISTANCE_FROM_CENTER           10.68
+#define SHORT_RIGHT_FRONT_SENSOR_ANGLE_FROM_FORWARD -0.53839
+
 
 double sensorToDistanceInCM(int sensor_val, std::vector<double> polynomial_coof)
 {
@@ -122,6 +125,17 @@ bool shouldPrioritizeRightWall(const RAS_Utils::sensors::SensorDistances &sd)
     if(!canFollowRightWall(sd)) return false;
     if(!canFollowLeftWall(sd)) return true;
     return getDistanceToRightWall(sd) < getDistanceToLeftWall(sd);
+}
+
+double getShortSensorAngle(bool right_side) {
+    return (right_side) ? (3*M_PI/2) : M_PI / 2.0;
+}
+
+double getShortSensorAngleCenterOffset(bool right_side, bool front)
+{
+    double angle = (front) ? SHORT_RIGHT_FRONT_SENSOR_ANGLE_FROM_FORWARD : M_PI - SHORT_RIGHT_FRONT_SENSOR_ANGLE_FROM_FORWARD;
+    angle *= (right_side) ? 1 : -1;
+    return angle;
 }
 
 

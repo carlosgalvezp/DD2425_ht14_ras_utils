@@ -22,6 +22,8 @@
 #define TOPIC_MAP_OCC_GRID              "/map/occ_grid_rviz"
 #define TOPIC_MAP_OCC_GRID_THICK        "/map/occ_grid_thick"
 #define TOPIC_MAP_SAVE                  "/map/save"
+#define TOPIC_ODOMETRY_ALIGN_FIX        "/robot/odometry/align_fix"
+#define TOPIC_MAP_COST                  "/map/array_cost"
 
 #define TOPIC_SPEAKER                   "/espeak/string"
 #define TOPIC_EVIDENCE                  "/evidence"
@@ -110,6 +112,8 @@ const std::string THICK_MAP_METADATA_PATH = MAP_ROOT_PATH  + std::string("thick_
 const std::string OBJECT_GRAPH_PATH = MAP_ROOT_PATH + std::string("object_graph.txt");
 const std::string OBJECT_POSITIONS_PATH = MAP_ROOT_PATH + std::string("object_positions.txt");
 const std::string OBJECT_BEST_PATH_PATH = MAP_ROOT_PATH + std::string("object_path.txt");
+
+const std::string INITIAL_ODOMETRY_ALIGNER = MAP_ROOT_PATH + std::string("initial_odometry_aligner");
 
     namespace Navigation_Modes
     {

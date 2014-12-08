@@ -2,9 +2,11 @@
 #define RAS_OCCUPANCY_MAP_UTILS_H
 
 #include <nav_msgs/OccupancyGrid.h>
+#include <std_msgs/Int64MultiArray.h>
 #include <iostream>
 #include <fstream>
 #include <queue>
+#include <set>
 
 #define OCC_GRID_SIMPLE_UNKNOWN_AREA 50
 #define OCC_GRID_SIMPLE_FREE_AREA    0
@@ -91,6 +93,13 @@ namespace bfs_search
       Traveler(int from_index, int index, int cost, int nr_points) : from_index(from_index), index(index), cost(cost), nr_points(nr_points){}
     } ;
 
+  struct CostStepInfo {
+        int index;
+        int step;
+
+        CostStepInfo(int index, int step) : index(index), step(step){}
+  };
+
 
     class CompareTravelers {
     public:
@@ -112,7 +121,7 @@ namespace bfs_search
         return return_vector;
     }
 
-    std::vector<geometry_msgs::Point> run(const nav_msgs::OccupancyGrid & occ_grid, int start_i, int start_j, std::function<bool(int) > & stopFunction)
+    std::vector<geometry_msgs::Point> run(const nav_msgs::OccupancyGrid & occ_grid, const std_msgs::Int64MultiArray & cost_grid, int start_i, int start_j, std::function<bool(int) > & stopFunction)
     {
         int index = start_i + start_j * occ_grid.info.height;
 
@@ -127,6 +136,7 @@ namespace bfs_search
         bfs_queue.push(Traveler(-1, index, 0, 1)); // minus one simply indicates its the start index
 
         int prevCost= -1;
+        std::vector<int> neighbours;
 
         while( !bfs_queue.empty() )
         {
@@ -136,7 +146,8 @@ namespace bfs_search
             bfs_queue.pop();
             prevCost = current_traveler.cost;
 
-            int current_cell_cost = occ_grid.data[current_traveler.index];
+            int current_cell_cost = cost_grid.data[current_traveler.index];
+
             int new_traveler_cost = current_traveler.cost + current_cell_cost;
 
            // std::cout << current_traveler.index << " cell cost " << current_cell_cost << std::endl;
@@ -160,14 +171,14 @@ namespace bfs_search
                 continue;
             }
 
-            if(current_cell_cost >= OCC_GRID_SIMPLE_UNKNOWN_AREA)
+            if(occ_grid.data[current_traveler.index] == OCC_GRID_SIMPLE_UNKNOWN_AREA || occ_grid.data[current_traveler.index] == OCC_GRID_SIMPLE_BLOCKED_AREA )
             {
                 // abort, we are hitting unknown or wall
                 continue;
             }
 
             // Not found a goal yet.
-            std::vector<int> neighbours = getClosest4Indexes(occ_grid, current_traveler.index);
+            neighbours = getClosest4Indexes(occ_grid, current_traveler.index);
             for(int neighbour : neighbours)
             {
                 bfs_queue.push(Traveler(current_traveler.index, neighbour, new_traveler_cost, current_traveler.nr_points + 1));
@@ -193,7 +204,7 @@ namespace bfs_search
 
 
 
-    std::vector<geometry_msgs::Point> getClosestUnknownPath(const nav_msgs::OccupancyGrid & occ_grid, double start_x, double start_y)
+    std::vector<geometry_msgs::Point> getClosestUnknownPath(const nav_msgs::OccupancyGrid & occ_grid, const std_msgs::Int64MultiArray & cost_grid, double start_x, double start_y)
     {
         int i, j;
         convertToMatrixPos(occ_grid, i, j, start_x, start_y);
@@ -201,10 +212,10 @@ namespace bfs_search
             return occ_grid.data[index] == OCC_GRID_SIMPLE_UNKNOWN_AREA;
         };
 
-        return run(occ_grid, i, j, stopFunction);
+        return run(occ_grid, cost_grid, i, j, stopFunction);
     }
 
-    std::vector<geometry_msgs::Point> getPathFromTo(const nav_msgs::OccupancyGrid & occ_grid, double from_x, double from_y, double to_x, double to_y)
+    std::vector<geometry_msgs::Point> getPathFromTo(const nav_msgs::OccupancyGrid & occ_grid, const std_msgs::Int64MultiArray & cost_grid, double from_x, double from_y, double to_x, double to_y)
     {
         int from_i, from_j, to_i, to_j;
         convertToMatrixPos(occ_grid, from_i, from_j, from_x, from_y);
@@ -215,7 +226,7 @@ namespace bfs_search
             return to_i + to_j * occ_grid.info.height == index;
         };
 
-        return run(occ_grid, from_i, from_j, stopFunction);
+        return run(occ_grid, cost_grid, from_i, from_j, stopFunction);
     }
 
 
