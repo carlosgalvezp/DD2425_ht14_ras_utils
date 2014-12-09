@@ -152,9 +152,9 @@ namespace bfs_search
 
            // std::cout << current_traveler.index << " cell cost " << current_cell_cost << std::endl;
 
-            if((visited_cost_map[current_traveler.index] != -1 && new_traveler_cost >= visited_cost_map[current_traveler.index]) || (cheapest_route_cost != -1 && new_traveler_cost >= cheapest_route_cost))
+            if((visited_cost_map[current_traveler.index] != -1 && new_traveler_cost >= visited_cost_map[current_traveler.index]) || (cheapest_route_cost != -1 && current_traveler.nr_points >= cheapest_route_nr_points))
             {
-                // The node we are visiting has been visited with a lower cost or we have found a route and the current cost is greater than that one
+                // The node we are visiting has been visited with a lower cost or we have found a route and the current path length is greater than that one
                 continue;
             }
 
