@@ -64,12 +64,12 @@ struct SensorDistances
     double left_back_;
     SensorDistances(){}
     SensorDistances(int front_reading, int back_reading, int right_front_reding, int right_back_reading, int left_front_reading, int left_back_reading)
-        : front_(longSensorToDistanceInCM(front_reading)),
-          back_(longSensorToDistanceInCM(back_reading)),
-          right_front_(shortSensorToDistanceInCM(right_front_reding)),
-          right_back_(shortSensorToDistanceInCM(right_back_reading)),
-          left_front_(shortSensorToDistanceInCM(left_front_reading)),
-          left_back_(shortSensorToDistanceInCM(left_back_reading))
+        : front_(front_reading*100.0),
+          back_(back_reading*100.0),
+          right_front_(right_front_reding*100.0),
+          right_back_(right_back_reading*100.0),
+          left_front_(left_front_reading*100.0),
+          left_back_(left_back_reading*100.0)
     {
     }
 };
