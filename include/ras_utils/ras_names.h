@@ -51,6 +51,7 @@
 
 // Parameter server
 #define PARAM_PHASE                     "/Phase"
+#define PARAM_ROBOT_VELOCITY            "/Robot_Velocity"
 #define PARAM_CONTEST                   "/Contest"
 
 // Rviz namespaces
@@ -62,11 +63,13 @@
 #define SHAPE_3D_OTHER     2
 
 // Colors
-#define COLOR_RED       0
-#define COLOR_GREEN     1
-#define COLOR_BLUE      2
-#define COLOR_YELLOW    3
-#define COLOR_PURPLE    4
+#define COLOR_RED            0
+#define COLOR_GREEN          1
+#define COLOR_BLUE           2
+#define COLOR_YELLOW         3
+#define COLOR_PURPLE         4
+#define COLOR_LIGHT_GREEN    5
+#define COLOR_ORANGE         6
 
 // Object IDs
 #define OBJECT_NAME_RED_CUBE         "Red Cube"
@@ -116,14 +119,13 @@ const std::string MODELS_COLOR_PATH =   MODELS_COLOR_ROOT + std::string("models.
 
 
 const std::vector<std::string> MODELS_3D_NAMES = {"cube", "ball"};
-const std::vector<std::string> COLOR_NAMES = {"red", "green", "blue", "yellow", "purple"};
+//const std::vector<std::string> COLOR_NAMES = {"red", "green", "blue", "yellow", "purple"};
+const std::vector<std::string> COLOR_NAMES = {"red", "green", "blue", "yellow", "purple", "light_green", "orange"};
 
 
 const std::string CALIBRATION_PATH = PROJECT_DATA_ROOT + std::string("cam_calibration/tf_robot_to_camera_link.txt");
 
 const std::string MAP_ROOT_PATH = PROJECT_DATA_ROOT + std::string("map/") ;
-const std::string THICK_MAP_DATA_PATH = MAP_ROOT_PATH + std::string("thick_map.png");
-const std::string THICK_MAP_METADATA_PATH = MAP_ROOT_PATH  + std::string("thick_map_metadata.txt");
 
 const std::string OBJECT_GRAPH_PATH = MAP_ROOT_PATH + std::string("object_graph.txt");
 const std::string OBJECT_POSITIONS_PATH = MAP_ROOT_PATH + std::string("object_positions.txt");

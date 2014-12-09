@@ -78,6 +78,71 @@ double Graph::computePathCost(std::vector<int>& path) const
     return cost;
 }
 
+std::ostream& operator<<(std::ostream &os, const Graph &g)
+{
+    // Number of nodes
+    os << g.getNodeCount()<<std::endl;
+
+    // Nodes
+    const std::vector<Node> &nodes = g.getNodes();
+    for(std::size_t i = 0; i < nodes.size(); ++i)
+    {
+        const Node &n =  nodes[i];
+        os << n.getID() <<" " <<n.getPosition().x_ << " "<<n.getPosition().y_<<std::endl;
+    }
+
+    // Number of edges
+    os << g.getEdgeCount() << std::endl;
+
+    // Edges
+    const std::vector<Edge> &edges = g.getEdges();
+    for(std::size_t i = 0; i < edges.size(); ++i)
+    {
+        const Edge &e = edges[i];
+        const Node &n1 = e.getP1();
+        const Node &n2 = e.getP2();
+
+        os << n1.getID() <<" " <<n2.getID() << " " << e.getCost() << std::endl;
+    }
+}
+
+std::istream& operator>>(std::istream &is, Graph &g)
+{
+    // Number of nodes
+    int n_nodes;
+    is >> n_nodes;
+
+    // Read nodes
+    std::vector<Node> nodes;
+    for(std::size_t i = 0; i < n_nodes; ++i)
+    {
+        int n_id;
+        double n_x, n_y;
+        is >> n_id >> n_x >> n_y;
+        Node n(n_x, n_y, n_id);
+        nodes.push_back(n);
+    }
+
+    // Read edges
+    int n_edges;
+    is >> n_edges;
+    std::vector<Edge> edges;
+    for(std::size_t i = 0; i < n_edges; ++i)
+    {
+        int n1_id, n2_id;
+        double cost;
+        is >> n1_id >> n2_id >> cost;
+        const Node &n1 = nodes[n1_id];
+        const Node &n2 = nodes[n2_id];
+
+        Edge e(n1, n2, cost);
+        edges.push_back(e);
+    }
+
+    // Create graph
+    g = Graph(nodes, edges);
+}
+
 namespace Graph_Utils
 {
     void readGraph(const std::string &path, Graph &graph)
