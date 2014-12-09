@@ -16,7 +16,7 @@
 #define NODE_NAVIGATION                 "navigation"
 
 // Topic names
-#define TOPIC_ARDUINO_ADC               "/arduino/adc" // Swap this and the one below!!
+#define TOPIC_ARDUINO_ADC               "/arduino/adc"
 #define TOPIC_ARDUINO_ADC_FILTERED      "/arduino/ir_m_filtered"
 #define TOPIC_ARDUINO_ADC_NOT_FILTERED  "/arduino/ir_m_not_filtered"
 
