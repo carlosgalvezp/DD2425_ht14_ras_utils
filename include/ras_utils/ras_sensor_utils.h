@@ -63,7 +63,7 @@ struct SensorDistances
     double left_front_;
     double left_back_;
     SensorDistances(){}
-    SensorDistances(int front_reading, int back_reading, int right_front_reding, int right_back_reading, int left_front_reading, int left_back_reading)
+    SensorDistances(double front_reading, double back_reading, double right_front_reding, double right_back_reading, double left_front_reading, double left_back_reading)
         : front_(front_reading*100.0),
           back_(back_reading*100.0),
           right_front_(right_front_reding*100.0),
