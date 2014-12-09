@@ -125,17 +125,17 @@ namespace bfs_search
     {
         int index = start_i + start_j * occ_grid.info.height;
 
-        std::vector<int> visited_cost_map(occ_grid.info.height * occ_grid.info.width, -1);
+        std::vector<long> visited_cost_map(occ_grid.info.height * occ_grid.info.width, -1);
         std::vector<int> cheapest_next_neighbour(occ_grid.info.height * occ_grid.info.width);
         std::priority_queue<Traveler, std::vector<Traveler>, CompareTravelers > bfs_queue;
         //std::queue<Traveler > bfs_queue;
-        int cheapest_route_cost = -1;
+        long cheapest_route_cost = -1;
         int end_index = -1;
         int cheapest_route_nr_points = 0;
         // Add the first to queue;
         bfs_queue.push(Traveler(-1, index, 0, 1)); // minus one simply indicates its the start index
 
-        int prevCost= -1;
+        long prevCost= -1;
         std::vector<int> neighbours;
 
         while( !bfs_queue.empty() )
@@ -146,9 +146,9 @@ namespace bfs_search
             bfs_queue.pop();
             prevCost = current_traveler.cost;
 
-            int current_cell_cost = cost_grid.data[current_traveler.index];
+            long current_cell_cost = cost_grid.data[current_traveler.index];
 
-            int new_traveler_cost = current_traveler.cost + current_cell_cost;
+            long new_traveler_cost = current_traveler.cost + current_cell_cost;
 
            // std::cout << current_traveler.index << " cell cost " << current_cell_cost << std::endl;
 
