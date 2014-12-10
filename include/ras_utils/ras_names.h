@@ -108,6 +108,13 @@
 #define COORD_FRAME_CAMERA_LINK         "camera_link"
 #define COORD_FRAME_CAMERA_RGB_OPTICAL  "camera_rgb_optical_frame"
 
+// IR Sensors
+#define IR_SENSOR_FRONT_RIGHT      0
+#define IR_SENSOR_FRONT_LEFT       1
+#define IR_SENSOR_BACK_RIGHT       2
+#define IR_SENSOR_BACK_LEFT        3
+#define IR_SENSOR_FRONT            4
+#define IR_SENSOR_BACK             5
 
 // ===========================================================================
 // ===========================================================================
