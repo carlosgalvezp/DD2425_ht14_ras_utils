@@ -2,10 +2,8 @@
 
 GeneticAlgorithm::GeneticAlgorithm(const Graph& graph)
 {
-    std::cout << "GA CONSTRUCTOR"<<std::endl;
     // ** Set random seed
     srand(std::time(NULL));
-    std::cout << "AFTER SRAND"<<std::endl;
 
     graph_ = graph;
     n_nodes_ = graph.getNodeCount();
@@ -13,13 +11,25 @@ GeneticAlgorithm::GeneticAlgorithm(const Graph& graph)
     //Help variable to initialize individuals
     for (unsigned int i = 0; i < n_nodes_; i++)
         possibleNodes_.push_back(i);
-    std::cout << "FINISHED GA CONSTRUCTOR"<<std::endl;
 }
 
 void GeneticAlgorithm::computeSolution(std::vector<Node> &path)
 {
     std::vector<int> path_idx;
-    this->computeSolution(path_idx);
+
+    // Only 3 nodes, 2 of which are the same (start and end), so just return the path
+    if(graph_.getNodeCount() < 4)
+    {
+        const std::vector<Node> & nodes = graph_.getNodes();
+        for(std::size_t i = 0; i < nodes.size(); ++i)
+        {
+            path_idx.push_back(nodes[i].getID());
+        }
+    }
+    else
+    {
+        this->computeSolution(path_idx);
+    }
     // Transform from indexes to actual nodes
     for(std::size_t i = 0; i < path_idx.size(); ++i)
     {
@@ -93,7 +103,6 @@ void GeneticAlgorithm::evolveGeneration()
         ellite_selection(newGeneration);
 
     // ** Selection
-    std::cout << "SELECTION"<<std::endl;
     selection(newGeneration);
 
     // ** Cross-over
@@ -165,7 +174,6 @@ void GeneticAlgorithm::selection(Generation &newGeneration)
     int j = 0;
     while(newGeneration.population_.size() < N_INDIVIDUALS)
     {
-        std::cout << "BEFORE RANDMAX "<<j++<<std::endl;
         double r = ((double) rand() / (RAND_MAX));
         for (unsigned int i = 0; i < currentGeneration_.cum_distribution_.size(); i++)
         {

@@ -15,14 +15,14 @@
 #define Y_MIN 0
 #define Y_MAX 1000
 
-#define N_NODES 10
+#define N_NODES 12
 
 
 void createGraph(double x_min, double x_max, double y_min, double y_max,
                  unsigned int n_nodes, Graph& graph);
 
 void visualizeGraph(Graph& graph);
-void visualizeSolution(Graph& graph, GeneticAlgorithm& gm);
+void visualizeSolution(const Graph &graph, const std::vector<Node> &path);
 
 Position createPosition(double x_min, double x_max, double y_min, double y_max);
 double randDouble(double x_min, double x_max);
@@ -68,7 +68,7 @@ void testTSP()
                                          (t2.tv_usec - t1.tv_usec)/1000000.0 << " seconds" << std::endl;
 
     // ** Visualize solution
-    visualizeSolution(graph, gm);
+    visualizeSolution(graph, solution);
 }
 
 void createGraph(double x_min, double x_max, double y_min, double y_max,
@@ -158,16 +158,13 @@ void visualizeGraph(Graph& graph)
     cv::destroyWindow("Graph");
 }
 
-void visualizeSolution(Graph& graph, GeneticAlgorithm& gm)
+void visualizeSolution(const Graph& graph, const std::vector<Node> &path)
 {
-    // ** Visualize path
-    Individual& ind = gm.getBestIndividual();
-    std::cout << "PATH: "<<std::endl;
-
-    for (unsigned int i = 0; i < ind.getGenes().size(); i++)
+    // ** Visualize path    
+    for (std::size_t i = 0; i < path.size(); ++i)
     {
-        std::cout << ind.getGenes().at(i);
-        if (i < ind.getGenes().size()-1)
+        std::cout << path[i].getID();
+        if (i < path.size()-1)
              std::cout<< "->";
         else
             std::cout << std::endl;
@@ -185,13 +182,10 @@ void visualizeSolution(Graph& graph, GeneticAlgorithm& gm)
     }
 
     // ** Draw solution
-    for (std::size_t i = 0; i < ind.getGenes().size()-1; i++)
+    for (std::size_t i = 0; i < path.size()-1; i++)
     {
-        int p1 = ind.getGenes().at(i);
-        int p2 = ind.getGenes().at(i+1);
-
-        Position pos1 = graph.getNodes().at(p1).getPosition();
-        Position pos2 = graph.getNodes().at(p2).getPosition();
+        Position pos1 = path[i].getPosition();
+        Position pos2 = path[i+1].getPosition();
 
         cv::line(img, cv::Point(pos1.x_, pos1.y_),
                       cv::Point(pos2.x_, pos2.y_), cv::Scalar(255,0,0),3);
