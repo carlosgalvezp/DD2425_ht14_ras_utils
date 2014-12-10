@@ -153,7 +153,7 @@ bool readTransform(const std::string &frame_from,
     }
     catch (tf::TransformException ex)
     {
-        ROS_ERROR("%s",ex.what());
+        ROS_ERROR("FAILED TO READ TRANSFORM BETWEEN %s and %s", frame_from.c_str(), frame_to.c_str());
         return false;
     }
 }

@@ -12,9 +12,9 @@ public:
     Node(const Position& pos, int id, bool is_object);
     Node(double x, double y, int id);
 
-    Position getPosition() const;
-    int getID() const;
-    bool isObject() const;
+    const Position& getPosition() const;
+    int getID()                   const;
+    bool isObject()               const;
 
     bool operator==(const Node &other) const;
 private:

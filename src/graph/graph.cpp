@@ -96,14 +96,17 @@ std::ostream& operator<<(std::ostream &os, const Graph &g)
 
     // Edges
     const std::vector<Edge> &edges = g.getEdges();
+    std::cout << "EDGES: "<<edges.size()<< std::endl;
     for(std::size_t i = 0; i < edges.size(); ++i)
     {
+        std::cout << "PRINTING EDGE i = "<<i<<std::endl;
         const Edge &e = edges[i];
         const Node &n1 = e.getP1();
         const Node &n2 = e.getP2();
 
         os << n1.getID() <<" " <<n2.getID() << " " << e.getCost() << std::endl;
     }
+    std::cout << "OUT OF <<"<<std::endl;
 }
 
 std::istream& operator>>(std::istream &is, Graph &g)
