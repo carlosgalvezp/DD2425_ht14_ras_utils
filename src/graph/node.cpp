@@ -25,9 +25,9 @@ Node::Node(double x, double y, int id)
     id_ = id;
 }
 
-Position Node::getPosition() const {   return pos_; }
-int      Node::getID()       const {   return id_;  }
-bool     Node::isObject()    const {   return is_object_;}
+const Position& Node::getPosition() const {   return pos_; }
+int      Node::getID()              const {   return id_;  }
+bool     Node::isObject()           const {   return is_object_;}
 
 bool Node::operator ==(const Node &obj) const
 {

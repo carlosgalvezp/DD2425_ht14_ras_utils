@@ -23,11 +23,16 @@
 #define TOPIC_ODOMETRY                  "/robot/odometry"
 #define TOPIC_ARDUINO_PWM               "/arduino/pwm"
 #define TOPIC_ARDUINO_ENCODERS          "/arduino/encoders"
+
 #define TOPIC_MAP_OCC_GRID              "/map/occ_grid_rviz"
 #define TOPIC_MAP_OCC_GRID_THICK        "/map/occ_grid_thick"
-#define TOPIC_MAP_SAVE                  "/map/save"
-#define TOPIC_ODOMETRY_ALIGN_FIX        "/robot/odometry/align_fix"
 #define TOPIC_MAP_COST                  "/map/array_cost"
+
+#define TOPIC_MAP_OCC_GRID_BAG          "/map/occ_grid_rviz_bag"
+#define TOPIC_MAP_OCC_GRID_THICK_BAG    "/map/occ_grid_thick_bag"
+#define TOPIC_MAP_COST_BAG              "/map/array_cost_bag"
+
+#define TOPIC_ODOMETRY_ALIGN_FIX        "/robot/odometry/align_fix"
 
 #define TOPIC_SPEAKER                   "/espeak/string"
 #define TOPIC_EVIDENCE                  "/evidence"
@@ -38,7 +43,7 @@
 #define TOPIC_IMU                       "/imu/data"
 #define TOPIC_MARKERS                   "/map_markers"
 #define TOPIC_OBJECT_MARKERS            "/map_object_markers"
-#define TOPIC_OBJECTS_EKF               "/object_detection/objects_ekf"
+#define TOPIC_OBJECT_AS_OBSTACLE        "/object_detection/object_as_obstacle"
 
 #define TOPIC_ROBOT_OBJECT_POSITION     "/object_detection/robot_position"
 #define TOPIC_OBSTACLE_LASER_MAP        "/obstacle_detection/laser"
@@ -103,6 +108,13 @@
 #define COORD_FRAME_CAMERA_LINK         "camera_link"
 #define COORD_FRAME_CAMERA_RGB_OPTICAL  "camera_rgb_optical_frame"
 
+// IR Sensors
+#define IR_SENSOR_FRONT_RIGHT      0
+#define IR_SENSOR_FRONT_LEFT       1
+#define IR_SENSOR_BACK_RIGHT       2
+#define IR_SENSOR_BACK_LEFT        3
+#define IR_SENSOR_FRONT            4
+#define IR_SENSOR_BACK             5
 
 // ===========================================================================
 // ===========================================================================

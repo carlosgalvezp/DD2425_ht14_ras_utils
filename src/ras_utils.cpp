@@ -107,7 +107,12 @@ namespace RAS_Utils
 
     double normalize_angle(double angle)
     {
-        return fmod( angle+M_PI, 2 * M_PI ) - M_PI;
+        double x = fmod(angle + M_PI, 2.0*M_PI);
+        if (x < 0)
+        {
+            x += 2.0*M_PI;
+        }
+        return (x - M_PI);
     }
 
     void normalize_probabilities(std::vector<double> &prob)
