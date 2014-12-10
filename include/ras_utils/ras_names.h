@@ -49,7 +49,6 @@
 #define TOPIC_OBSTACLE_LASER_MAP        "/obstacle_detection/laser"
 
 
-
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
 #define SRV_NAVIGATION_IN               "/navigation/comm"
@@ -148,6 +147,8 @@ const std::string INITIAL_ODOMETRY_ALIGNER = MAP_ROOT_PATH + std::string("initia
 const std::string HSV_PARAMS_ROOT_PATH = PROJECT_DATA_ROOT + std::string("HSV/");
 const std::string HSV_PARAMS_LAB       = HSV_PARAMS_ROOT_PATH + std::string("lab.txt");
 const std::string HSV_PARAMS_CONTEST   = HSV_PARAMS_ROOT_PATH + std::string("contest.txt");
+
+const std::string FILE_TIME_START_MAP_ROSBAG = "time_start_map_bag.txt";
 
     namespace Navigation_Modes
     {

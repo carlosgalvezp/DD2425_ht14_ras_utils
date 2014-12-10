@@ -39,9 +39,9 @@ void Individual::mutate()
     bool finished(false);
     while (!finished)
     {
-        // Generate two random positions between 1 and genes.size() - 2 (don't consider start and end)
-        int p1 = rand() % (genes_.size() - 2) + 1;
-        int p2 = rand() % (genes_.size() - 2) + 1;
+        // Generate two random positions between 1 and genes.size() - 2 (don't consider start)
+        int p1 = rand() % (genes_.size() - 1) + 1;
+        int p2 = rand() % (genes_.size() - 1) + 1;
 
         // Swap positions
         if (p1 != p2)

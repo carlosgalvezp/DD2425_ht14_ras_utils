@@ -15,7 +15,7 @@
 #define Y_MIN 0
 #define Y_MAX 1000
 
-#define N_NODES 12
+#define N_NODES 3
 
 
 void createGraph(double x_min, double x_max, double y_min, double y_max,
@@ -82,7 +82,7 @@ void createGraph(double x_min, double x_max, double y_min, double y_max,
     for (unsigned int i = 0; i < n_nodes; i++)
     {
         Position p;
-        if (i == 0 || i == n_nodes-1)
+        if (i == 0)
             p = Position(0,0);
         else
             p = createPosition(x_min, x_max, y_min, y_max);

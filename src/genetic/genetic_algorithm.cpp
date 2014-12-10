@@ -17,8 +17,8 @@ void GeneticAlgorithm::computeSolution(std::vector<Node> &path)
 {
     std::vector<int> path_idx;
 
-    // Only 3 nodes, 2 of which are the same (start and end), so just return the path
-    if(graph_.getNodeCount() < 4)
+    // Only 2 nodes, 1 of which is the start, so just return the path
+    if(graph_.getNodeCount() < 3)
     {
         const std::vector<Node> & nodes = graph_.getNodes();
         for(std::size_t i = 0; i < nodes.size(); ++i)
@@ -81,11 +81,9 @@ void GeneticAlgorithm::initializeGeneration()
 Individual GeneticAlgorithm::createRandomIndividual()
 {
     std::vector<int> path(possibleNodes_);
-    std::random_shuffle(path.begin()+1, path.end()-1); //The origin and end is always the (0,0) point
-//    std::cout << "First: "<<path[0] <<"; Last: "<<path[path.size()-1]<<std::endl;
+    std::random_shuffle(path.begin()+1, path.end()); //The origin is always the (0,0) point
     double cost = graph_.computePathCost(path);
     Individual individual(path, 1.0/cost);
-//    individual.print();
     return individual;
 }
 
@@ -171,7 +169,6 @@ void GeneticAlgorithm::ellite_selection(Generation& newGeneration)
 void GeneticAlgorithm::selection(Generation &newGeneration)
 {
     // ** Multinomial resampling
-    int j = 0;
     while(newGeneration.population_.size() < N_INDIVIDUALS)
     {
         double r = ((double) rand() / (RAND_MAX));
