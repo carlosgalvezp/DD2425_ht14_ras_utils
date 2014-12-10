@@ -57,12 +57,18 @@ void convertToRealPos(const nav_msgs::OccupancyGrid & grid_data, double & x, dou
     y = real_j * resolution;
 }
 
+void convertToIAndJPos(const nav_msgs::OccupancyGrid &grid_data, int &i, int &j, int index)
+{
+
+    i = index % grid_data.info.height;
+    j = index - grid_data.info.height*i;
+}
+
 void convertToRealPos(const nav_msgs::OccupancyGrid &grid_data, double &x, double &y, int index)
 {
 
     int i, j;
-    i = index % grid_data.info.height;
-    j = index / grid_data.info.height;
+    convertToIAndJPos(grid_data, i, j, index);
     convertToRealPos(grid_data, x, y, i, j);
 }
 
@@ -79,6 +85,11 @@ bool isFree(const nav_msgs::OccupancyGrid & grid_data, double x, double y)
 bool isWall(const nav_msgs::OccupancyGrid & grid_data, double x, double y)
 {
     return getValue(grid_data, x, y) == OCC_GRID_SIMPLE_BLOCKED_AREA;
+}
+
+int toIndexPos(const nav_msgs::OccupancyGrid & grid_data, int i, int j)
+{
+    return i + j * grid_data.info.height;
 }
 
 namespace bfs_search
@@ -121,9 +132,45 @@ namespace bfs_search
         return return_vector;
     }
 
+    void getApproximatePoint(const nav_msgs::OccupancyGrid & occ_grid, int i, int j, int &new_i, int &new_j)
+    {
+        int index = toIndexPos(occ_grid, i, j);
+        std::queue<int> bfs_queue;
+        bfs_queue.push(index);
+        std::vector<bool> visited(occ_grid.info.height * occ_grid.info.width, false);
+        bool found = false;
+        int found_index = index;
+        int visited_count = 0;
+        std::vector<int> neighbours;
+
+        while(!bfs_queue.empty() && !found && visited_count <= 256)
+        {
+            visited_count++;
+            int current_index = bfs_queue.front();
+            bfs_queue.pop();
+            visited[current_index] = true;
+            if(occ_grid.data[current_index] != OCC_GRID_SIMPLE_BLOCKED_AREA)
+            {
+                found = true;
+                found_index = current_index;
+                break;
+            }
+
+            neighbours = getClosest4Indexes(occ_grid, current_index);
+            for(int neighbour : neighbours)
+            {
+                if(!visited[neighbour])
+                {
+                    bfs_queue.push(neighbour);
+                }
+            }
+        }
+        convertToIAndJPos(occ_grid, new_i, new_j, found_index);
+    }
+
     std::vector<geometry_msgs::Point> run(const nav_msgs::OccupancyGrid & occ_grid, const std_msgs::Int64MultiArray & cost_grid, int start_i, int start_j, std::function<bool(int) > & stopFunction)
     {
-        int index = start_i + start_j * occ_grid.info.height;
+        int index = toIndexPos(occ_grid, start_i, start_j);
 
         std::vector<long> visited_cost_map(occ_grid.info.height * occ_grid.info.width, -1);
         std::vector<int> cheapest_next_neighbour(occ_grid.info.height * occ_grid.info.width);
@@ -140,7 +187,6 @@ namespace bfs_search
 
         while( !bfs_queue.empty() )
         {
-
 
             Traveler current_traveler = bfs_queue.top();
             bfs_queue.pop();
@@ -208,6 +254,7 @@ namespace bfs_search
     {
         int i, j;
         convertToMatrixPos(occ_grid, i, j, start_x, start_y);
+        getApproximatePoint(occ_grid, i, j, i, j);
         std::function<bool(int) > stopFunction = [&occ_grid](int index){
             return occ_grid.data[index] == OCC_GRID_SIMPLE_UNKNOWN_AREA;
         };
@@ -221,6 +268,9 @@ namespace bfs_search
         convertToMatrixPos(occ_grid, from_i, from_j, from_x, from_y);
         convertToMatrixPos(occ_grid, to_i, to_j, to_x, to_y);
 
+        getApproximatePoint(occ_grid, to_i, to_j, to_i, to_j);
+        getApproximatePoint(occ_grid, from_i, from_j, from_i, from_j);
+
         std::function<bool(int) > stopFunction = [&occ_grid, &to_i, &to_j](int index)
         {
             return to_i + to_j * occ_grid.info.height == index;
@@ -228,7 +278,6 @@ namespace bfs_search
 
         return run(occ_grid, cost_grid, from_i, from_j, stopFunction);
     }
-
 
 
 }}}
