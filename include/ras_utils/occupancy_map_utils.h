@@ -60,8 +60,8 @@ void convertToRealPos(const nav_msgs::OccupancyGrid & grid_data, double & x, dou
 void convertToIAndJPos(const nav_msgs::OccupancyGrid &grid_data, int &i, int &j, int index)
 {
 
-    i = index % grid_data.info.height;
-    j = index - grid_data.info.height*i;
+    j = index / grid_data.info.height;
+    i = index - grid_data.info.height*j;
 }
 
 void convertToRealPos(const nav_msgs::OccupancyGrid &grid_data, double &x, double &y, int index)
@@ -135,6 +135,7 @@ namespace bfs_search
     void getApproximatePoint(const nav_msgs::OccupancyGrid & occ_grid, int i, int j, int &new_i, int &new_j)
     {
         int index = toIndexPos(occ_grid, i, j);
+        
         std::queue<int> bfs_queue;
         bfs_queue.push(index);
         std::vector<bool> visited(occ_grid.info.height * occ_grid.info.width, false);
