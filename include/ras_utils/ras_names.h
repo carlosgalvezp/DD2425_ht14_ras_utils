@@ -48,6 +48,8 @@
 #define TOPIC_ROBOT_OBJECT_POSITION     "/object_detection/robot_position"
 #define TOPIC_OBSTACLE_LASER_MAP        "/obstacle_detection/laser"
 
+#define TOPIC_PATH_FINDER_POINT         "/navigation/path_finder_point"
+
 
 // Servers names
 #define SRV_BRAIN_IN                    "/brain/comm"
