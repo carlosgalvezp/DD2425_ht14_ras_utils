@@ -32,7 +32,7 @@
 #define TOPIC_MAP_OCC_GRID_THICK_BAG    "/map/occ_grid_thick_bag"
 #define TOPIC_MAP_COST_BAG              "/map/array_cost_bag"
 
-#define TOPIC_ODOMETRY_ALIGN_FIX        "/robot/odometry/align_fix"
+#define TOPIC_LOCALIZATION              "/robot/odometry/localization"
 
 #define TOPIC_SPEAKER                   "/espeak/string"
 #define TOPIC_EVIDENCE                  "/evidence"

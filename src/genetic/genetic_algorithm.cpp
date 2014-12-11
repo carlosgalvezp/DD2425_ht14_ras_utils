@@ -52,9 +52,9 @@ void GeneticAlgorithm::computeSolution(std::vector<int> &path)
         evolveGeneration();
 
         gettimeofday(&t2, NULL);
-        std::cout << "[Generation "<<i<<"] Fitness: "<<currentGeneration_.total_fitness_
-                                    <<" Best fitness: "<< bestFitness_
-                  << " ["<< (t2.tv_usec - t1.tv_usec)/1000.0 << " ms]"<<std::endl;
+//        std::cout << "[Generation "<<i<<"] Fitness: "<<currentGeneration_.total_fitness_
+//                                    <<" Best fitness: "<< bestFitness_
+//                  << " ["<< (t2.tv_usec - t1.tv_usec)/1000.0 << " ms]"<<std::endl;
     }
     // ** Get best individual
     Individual &best = this->getBestIndividual();
