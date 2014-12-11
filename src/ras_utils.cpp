@@ -84,6 +84,8 @@ namespace RAS_Utils
         return res/N;
     }
 
+
+
     double std(const std::vector<double> &data, double mu)
     {
         double res=0;
@@ -94,6 +96,7 @@ namespace RAS_Utils
         }
         return sqrt(res/N);
     }
+
 
     double std(const std::vector<double> &data)
     {

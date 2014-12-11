@@ -4,6 +4,7 @@
 #include <ctime>
 #include <sys/time.h>
 #include <vector>
+#include <queue>
 #include <math.h>
 #include "ros/ros.h"
 #include <ras_srv_msgs/Command.h>
@@ -29,8 +30,12 @@ void print(const std::string & text, const double value1, const double value2);
 void print(const std::vector<std::string> & texts, const std::vector<double> & values);
 
 double mean(const std::vector<double> &data);
+double mean(const std::queue<double> &data);
+
 double std(const std::vector<double> &data, double mu);
 double std(const std::vector<double> &data);
+
+double std(const std::queue<double> &data);
 
 double mahalanobis_distance(const double &x, const double &mu, const double &sigma);
 double euclidean_distance(double x1, double y1, double x2, double y2 );

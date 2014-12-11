@@ -141,16 +141,17 @@ namespace bfs_search
         std::vector<bool> visited(occ_grid.info.height * occ_grid.info.width, false);
         bool found = false;
         int found_index = index;
+        visited[index] = true;
         int visited_count = 0;
         std::vector<int> neighbours;
 
-        while(!bfs_queue.empty() && !found && visited_count <= 256)
+        while(!bfs_queue.empty() && !found && visited_count <= 4000)
         {
             visited_count++;
             int current_index = bfs_queue.front();
             bfs_queue.pop();
-            visited[current_index] = true;
-            if(occ_grid.data[current_index] != OCC_GRID_SIMPLE_BLOCKED_AREA)
+            
+            if(occ_grid.data[current_index] == OCC_GRID_SIMPLE_FREE_AREA)
             {
                 found = true;
                 found_index = current_index;
@@ -162,6 +163,7 @@ namespace bfs_search
             {
                 if(!visited[neighbour])
                 {
+                    visited[neighbour] = true;
                     bfs_queue.push(neighbour);
                 }
             }
