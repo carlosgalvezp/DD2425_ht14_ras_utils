@@ -152,6 +152,8 @@ const std::string HSV_PARAMS_CONTEST   = HSV_PARAMS_ROOT_PATH + std::string("con
 
 const std::string FILE_TIME_START_MAP_ROSBAG = "time_start_map_bag.txt";
 
+const std::string INITIAL_POSITION = PROJECT_DATA_ROOT + "initial_position.txt";
+
     namespace Navigation_Modes
     {
         static const int NAVIGATION_WALL_FOLLOW = 1;

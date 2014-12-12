@@ -145,7 +145,7 @@ namespace bfs_search
         int visited_count = 0;
         std::vector<int> neighbours;
 
-        while(!bfs_queue.empty() && !found && visited_count <= 4000)
+        while(!bfs_queue.empty() && !found && visited_count <= 600)
         {
             visited_count++;
             int current_index = bfs_queue.front();
